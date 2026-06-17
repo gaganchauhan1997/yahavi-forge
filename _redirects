@@ -1,0 +1,9 @@
+# Cloudflare Pages — redirects / rewrites
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+# Note: Cloudflare Pages also serves clean URLs automatically (e.g. /login -> login.html).
+# These explicit rewrites make the friendly paths deterministic.
+
+/login     /login.html      200
+/terms     /terms.html      200
+/privacy   /privacy.html    200
+/signin    /login.html      301
