@@ -37,6 +37,7 @@
   </div>
 
   <div class="nav-status">
+    <div id="auth-slot" style="display:flex; gap:8px; align-items:center;"></div>
     <div class="status-pill" id="connection-status">
       <span class="dot"></span>NO KEYS — ADD ONE
     </div>
@@ -530,6 +531,8 @@ Twitter: @yourhandle"></textarea>
       "Free intelligence, infinite capability."
     </div>
     <div class="footer-links">
+      <a href="terms.html">TERMS</a>
+      <a href="privacy.html">PRIVACY</a>
       <a href="https://hackknow.com" target="_blank" rel="noopener noreferrer">HACKKNOW.COM</a>
       <a href="https://github.com/gaganchauhan1997" target="_blank" rel="noopener noreferrer">GITHUB</a>
       <a href="https://gaganchauhan1997.github.io/hackknow-os/" target="_blank" rel="noopener noreferrer">HACKKNOW//OS</a>
@@ -569,6 +572,9 @@ Twitter: @yourhandle"></textarea>
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
+<!-- Shared HackKnow auth (SSO) — supabase-js must load before hk-auth.js -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="hk-auth.js"></script>
 <script src="app.js"></script>
 <script src="report.js"></script>
 </body>
