@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Data Processing Addendum — Yahavi Forge · by Hackknow</title>
+<meta name="description" content="Data Processing Addendum (DPA) for Yahavi Forge by Hackknow — roles, sub-processors, security, and data subject rights." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="legal.css" />
+<link rel="stylesheet" href="forge-ui.css" />
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a class="brand" href="index.html" style="border:none;">
+    <div class="brand-mark">Y</div>
+    <span>YAHAVI</span>
+    <span class="brand-sub">FORGE</span>
+  </a>
+  <div class="nav-status">
+    <a class="btn-settings" href="privacy.html" style="background:var(--ink);">▸ PRIVACY</a>
+    <a class="btn-settings" href="index.html">▸ BACK TO FORGE</a>
+  </div>
+</nav>
+
+<main class="legal-main">
+  <header class="legal-head">
+    <div class="legal-eyebrow">▸ DPA · DATA PROCESSING ADDENDUM</div>
+    <h1 class="legal-title">Data Processing<br>Addendum</h1>
+    <div class="legal-meta">
+      <span>Service: <strong>Yahavi Forge</strong></span>
+      <span>Effective: <strong>18 June 2026</strong></span>
+      <span>Version: <strong>1.0</strong></span>
+    </div>
+  </header>
+
+  <div class="legal-intro">
+    This Data Processing Addendum ("DPA") forms part of the <a href="terms.html">Terms &amp; Conditions</a> between
+    Hackknow ("we") and any customer or organisation that uses Yahavi Forge to process personal data ("Customer",
+    "you"). It reflects the requirements of India's DPDP Act 2023 and, where applicable, the GDPR. For most individual
+    users no DPA is needed — Forge stores keys and resume text only in your browser; this DPA matters mainly for
+    business/team use.
+  </div>
+
+  <section class="legal-section" id="roles">
+    <h2><span class="num">01</span>Roles &amp; scope</h2>
+    <p>For account and authentication data, Hackknow acts as a <strong>controller / data fiduciary</strong>. To the
+    limited extent you direct Forge to process personal data on your behalf, Hackknow acts as a <strong>processor /
+    data processor</strong> and will process such data only on your documented instructions and to provide the service.</p>
+    <div class="legal-callout yellow"><span class="tag">▸ Key fact</span>The most sensitive data (your API keys and the
+    resume/job text you enter) is processed <strong>in your browser</strong> and sent directly to the AI provider you
+    choose. Hackknow does not receive or store that content on its servers.</div>
+  </section>
+
+  <section class="legal-section" id="nature">
+    <h2><span class="num">02</span>Nature of processing</h2>
+    <ul>
+      <li><strong>Subject matter:</strong> providing the Forge AI career tools and HackKnow account/SSO.</li>
+      <li><strong>Categories of data:</strong> account identifiers (email, name, avatar, provider id), authentication/usage metadata; any content you choose to enter (processed client-side).</li>
+      <li><strong>Data subjects:</strong> you and end users of your account.</li>
+      <li><strong>Duration:</strong> for the term of your use of Forge, subject to the retention terms in the Privacy Policy.</li>
+    </ul>
+  </section>
+
+  <section class="legal-section" id="subprocessors">
+    <h2><span class="num">03</span>Sub-processors</h2>
+    <p>We use the following sub-processors. We will give reasonable notice of changes and remain responsible for their compliance:</p>
+    <table class="legal-table">
+      <thead><tr><th>Sub-processor</th><th>Purpose</th><th>Region</th></tr></thead>
+      <tbody>
+        <tr><td>Supabase</td><td>Authentication &amp; account database</td><td>Singapore (ap-southeast-1)</td></tr>
+        <tr><td>Cloudflare</td><td>Hosting, CDN, security</td><td>Global edge</td></tr>
+        <tr><td>Google / GitHub</td><td>OAuth sign-in providers (optional)</td><td>Global</td></tr>
+        <tr><td>AI providers (Groq, Google Gemini, OpenRouter, Together, Mistral, Cohere)</td><td>Generate output from input your browser sends, using your key</td><td>Per provider</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="legal-section" id="security">
+    <h2><span class="num">04</span>Security measures</h2>
+    <p>We apply appropriate technical and organisational measures: HTTPS/TLS in transit, row-level security on our
+    database, least-privilege access, a client-side key model that keeps secrets off our servers, and reputable
+    processors. No system is perfectly secure, but minimising what we hold is itself a core safeguard.</p>
+  </section>
+
+  <section class="legal-section" id="rights">
+    <h2><span class="num">05</span>Data subject rights &amp; assistance</h2>
+    <p>We will provide reasonable assistance to help you respond to data subject requests (access, correction,
+    deletion, portability, objection) and to meet your security, breach-notification, and impact-assessment
+    obligations, taking into account the nature of the processing and the information available to us.</p>
+  </section>
+
+  <section class="legal-section" id="breach">
+    <h2><span class="num">06</span>Breach notification</h2>
+    <p>If we become aware of a personal-data breach affecting data processed for you, we will notify you without undue
+    delay and provide the information reasonably needed for you to meet your reporting duties.</p>
+  </section>
+
+  <section class="legal-section" id="transfer">
+    <h2><span class="num">07</span>International transfers</h2>
+    <p>Where data is transferred across borders (e.g. our database in Singapore, global processors), we rely on
+    appropriate safeguards such as standard contractual clauses or equivalent mechanisms required by applicable law.</p>
+  </section>
+
+  <section class="legal-section" id="deletion">
+    <h2><span class="num">08</span>Return &amp; deletion</h2>
+    <p>On termination, or on your request, we will delete or return personal data processed on your behalf, except
+    where retention is required by law. Account data deletion is described in the <a href="privacy.html">Privacy Policy</a>.</p>
+  </section>
+
+  <section class="legal-section" id="contact">
+    <h2><span class="num">09</span>Contact</h2>
+    <p>To request a signed DPA or raise a data-processing question, email <a href="mailto:team@hackknow.com">team@hackknow.com</a>.
+    <a href="#roles">▸ Back to top</a></p>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="forge-ui.js"></script>
+</body>
+</html>

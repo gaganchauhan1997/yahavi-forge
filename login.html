@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="forge-ui.css" />
 <style>
   /* Login-only layout — built on the shared brutalist tokens */
   body { display: flex; flex-direction: column; min-height: 100vh; }
@@ -128,22 +129,13 @@
   </div>
 </div>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand">▸ YAHAVI <span class="accent">FORGE</span></div>
-    <div class="footer-meta">Built by Hackknow · Operator: Myth · 2026<br>"Free intelligence, infinite capability."</div>
-    <div class="footer-links">
-      <a href="terms.html">TERMS</a>
-      <a href="privacy.html">PRIVACY</a>
-      <a href="https://hackknow.com" target="_blank" rel="noopener noreferrer">HACKKNOW.COM</a>
-    </div>
-  </div>
-</footer>
+<div id="site-footer"></div>
 
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="hk-auth.js"></script>
+<script src="forge-ui.js"></script>
 <script>
 (function () {
   var msgEl = document.getElementById('auth-msg');

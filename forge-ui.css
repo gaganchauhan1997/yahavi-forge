@@ -1,0 +1,228 @@
+/* ============================================
+   YAHAVI FORGE — UI LAYER
+   (1) Fixed sidebar module nav  (2) Rich ecosystem footer
+   Built on the existing brutalist tokens in styles.css.
+   ============================================ */
+
+:root { --nav-h: 64px; --sidebar-w: 236px; }
+
+/* ============================================
+   APP SHELL + SIDEBAR
+   ============================================ */
+.app-shell { display: flex; align-items: flex-start; }
+
+.app-shell > .container { flex: 1 1 auto; min-width: 0; max-width: 1180px; margin: 0 auto; }
+
+.sidebar {
+  flex: 0 0 var(--sidebar-w);
+  width: var(--sidebar-w);
+  position: sticky;
+  top: var(--nav-h);
+  align-self: flex-start;
+  height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+  background: var(--paper);
+  border-right: var(--border);
+  z-index: 90;
+}
+
+.sidebar-inner { padding: 20px 14px 40px; }
+
+.sidebar-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0 6px 12px;
+  margin-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.sidebar-tabs { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+
+/* Reuse .nav-tab (app.js binds these) but lay them out vertically */
+.sidebar .nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 12px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.1s;
+}
+.sidebar .nav-tab::before { content: "▸"; color: var(--pink); font-weight: 900; }
+.sidebar .nav-tab:hover {
+  background: var(--yellow);
+  border-color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.sidebar .nav-tab.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--pink);
+}
+.sidebar .nav-tab.active::before { color: var(--yellow); }
+
+.sidebar-foot {
+  margin: 20px 6px 0;
+  padding-top: 14px;
+  border-top: 2px dashed var(--ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+
+/* Hamburger (mobile only) */
+.nav-burger {
+  display: none;
+  width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  background: var(--yellow);
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  font-size: 18px; font-weight: 900;
+  flex: none;
+}
+.nav-burger:hover { background: var(--ink); color: var(--paper); }
+
+.sidebar-overlay { position: fixed; inset: 0; background: rgba(10,10,10,0.6); z-index: 240; display: none; }
+.sidebar-overlay.open { display: block; }
+
+@media (max-width: 991px) {
+  .app-shell { display: block; }
+  .nav-burger { display: inline-flex; }
+  .sidebar {
+    position: fixed; top: 0; left: 0;
+    height: 100vh; width: min(280px, 82vw);
+    flex-basis: auto;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    border-right: var(--border-thick);
+    z-index: 250;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-inner { padding-top: 24px; }
+  .app-shell > .container { max-width: none; }
+}
+
+/* ============================================
+   RICH ECOSYSTEM FOOTER
+   ============================================ */
+.site-footer {
+  margin-top: 80px;
+  background: var(--ink);
+  color: var(--paper);
+  border-top: var(--border-thick);
+}
+.site-footer a { color: var(--paper); border-bottom: none; font-weight: 500; }
+.site-footer a:hover { color: var(--ink); background: var(--yellow); }
+.footer-wrap { max-width: 1280px; margin: 0 auto; }
+
+/* Newsletter row */
+.footer-news { border-bottom: 2px solid rgba(250,246,233,0.14); }
+.footer-news-inner {
+  max-width: 1280px; margin: 0 auto; padding: 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.footer-news h3 { font-family: var(--font-display); font-size: clamp(20px,3vw,28px); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 6px; }
+.footer-news p { font-family: var(--font-mono); font-size: 12px; color: rgba(250,246,233,0.6); letter-spacing: 0.03em; }
+.footer-news form { display: flex; gap: 10px; flex: 1; min-width: 280px; max-width: 460px; }
+.footer-news input {
+  flex: 1; width: auto; background: var(--paper); color: var(--ink);
+  border: var(--border); padding: 12px 14px; font-family: var(--font-body); font-size: 14px;
+  box-shadow: 4px 4px 0 var(--yellow);
+}
+.footer-news input:focus { outline: none; transform: translate(1px,1px); box-shadow: 2px 2px 0 var(--yellow); background: var(--paper); }
+.footer-news button {
+  background: var(--yellow); color: var(--ink); border: var(--border);
+  padding: 12px 18px; font-family: var(--font-mono); font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; box-shadow: 4px 4px 0 var(--pink);
+  transition: transform 0.1s, box-shadow 0.1s; white-space: nowrap;
+}
+.footer-news button:hover { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--pink); }
+
+/* Columns */
+.footer-cols {
+  padding: 44px 32px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+.footer-brandcol .footer-logo { font-family: var(--font-display); font-size: 24px; text-transform: uppercase; letter-spacing: -0.01em; }
+.footer-brandcol .footer-logo .accent { color: var(--yellow); }
+.footer-brandcol .footer-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); margin: 4px 0 14px; }
+.footer-brandcol p.blurb { font-size: 13px; line-height: 1.55; color: rgba(250,246,233,0.6); max-width: 280px; margin-bottom: 18px; }
+
+.footer-social { display: flex; gap: 10px; }
+.footer-social a {
+  width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  background: rgba(250,246,233,0.08); border: 2px solid rgba(250,246,233,0.25);
+}
+.footer-social a:hover { background: var(--yellow); border-color: var(--yellow); }
+.footer-social svg { width: 18px; height: 18px; }
+
+.footer-col h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--yellow); margin-bottom: 14px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.footer-col a { font-family: var(--font-body); font-size: 13px; color: rgba(250,246,233,0.65); }
+.footer-col a:hover { color: var(--ink); background: var(--yellow); padding: 0 3px; }
+
+/* Trust badges */
+.footer-badges {
+  border-top: 2px solid rgba(250,246,233,0.14);
+  padding: 22px 32px;
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+}
+.footer-badge {
+  border: 2px solid rgba(250,246,233,0.2); padding: 8px 14px; min-width: 150px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.footer-badge strong { font-family: var(--font-display); font-size: 13px; text-transform: uppercase; color: var(--paper); }
+.footer-badge span { font-family: var(--font-mono); font-size: 10px; color: rgba(250,246,233,0.55); letter-spacing: 0.03em; }
+
+/* Contact row */
+.footer-contact {
+  border-top: 2px solid rgba(250,246,233,0.14);
+  padding: 16px 32px;
+  display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 12px; color: rgba(250,246,233,0.55);
+}
+.footer-contact a { color: rgba(250,246,233,0.7); }
+.footer-contact .sep { color: rgba(250,246,233,0.2); }
+
+/* Bottom bar */
+.footer-bottom {
+  border-top: 2px solid rgba(250,246,233,0.14);
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.footer-copy { font-family: var(--font-mono); font-size: 11px; color: rgba(250,246,233,0.45); letter-spacing: 0.03em; }
+.footer-legal { display: flex; gap: 16px; flex-wrap: wrap; }
+.footer-legal a { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(250,246,233,0.5); }
+
+@media (max-width: 880px) {
+  .footer-cols { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-brandcol { grid-column: 1 / -1; }
+  .footer-news-inner { flex-direction: column; align-items: flex-start; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 520px) {
+  .footer-cols { grid-template-columns: 1fr; }
+  .footer-news, .footer-cols, .footer-badges, .footer-contact, .footer-bottom { padding-left: 18px; padding-right: 18px; }
+}
