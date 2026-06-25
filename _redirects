@@ -1,9 +1,7 @@
-# Cloudflare Pages — redirects / rewrites
-# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
-# Note: Cloudflare Pages also serves clean URLs automatically (e.g. /login -> login.html).
-# These explicit rewrites make the friendly paths deterministic.
+# Cloudflare Pages already serves clean URLs automatically:
+#   /login  ->  serves login.html
+#   /login.html  ->  308 redirect to /login
+# So manual "/clean  /x.html  200" rewrites are NOT needed — and they caused a
+# redirect loop on /login, /terms, /privacy. Removed. Only a friendly alias kept.
 
-/login     /login.html      200
-/terms     /terms.html      200
-/privacy   /privacy.html    200
-/signin    /login.html      301
+/signin   /login   301
