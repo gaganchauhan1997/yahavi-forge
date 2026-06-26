@@ -1,3 +1,5 @@
 # Cloudflare Pages auto-strips .html, so /app.html is served at /app natively.
 # Just an alias for old-style /signin → /login.
-/signin   /login   301
+/signin    /login    301
+/help      /tutorial 301
+/guide     /tutorial 301

@@ -50,20 +50,20 @@
       </div>`
     }).join('')
 
-    // v3: append My Account + Resources sections + KEYS button pinned at bottom
+    // v5: My Account + Resources — links now route to real pages (not broken hashes)
     const accountSection = `
       <div class="sidebar-section">
         <div class="sidebar-group-label">▸ My Account</div>
         <ul class="sidebar-foot-links">
-          <li><a href="#/profile" data-link="profile">👤 Profile</a></li>
-          <li><a href="#/settings" data-link="settings">⚙ Settings</a></li>
-          <li><a href="/#pricing" data-link="pricing">💎 Pricing</a></li>
+          <li><a href="/login" data-link="profile">👤 Profile / Sign in</a></li>
+          <li><a href="/settings" data-link="settings">⚙ Settings</a></li>
+          <li><a href="/pricing" data-link="pricing">💎 Pricing</a></li>
         </ul>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-group-label">▸ Resources</div>
         <ul class="sidebar-foot-links">
-          <li><a href="/#tutorial" data-link="help">📘 Tutorial</a></li>
+          <li><a href="/tutorial" data-link="help">📘 Tutorial</a></li>
           <li><a href="mailto:team@hackknow.com">✉ team@hackknow.com</a></li>
           <li><a href="/terms">📜 Terms</a></li>
           <li><a href="/privacy">🔒 Privacy</a></li>

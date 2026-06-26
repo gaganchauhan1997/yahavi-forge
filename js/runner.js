@@ -250,75 +250,100 @@
         () => F.UI.toast('Copy failed', 'error')
       )
     })
+    // v5 — wrap exports with paywall guard so guests/free tier see plan options
+    const Paywall = root.HKForge && root.HKForge.Paywall
+    const guard = (action, fn) => {
+      if (Paywall && Paywall.guard) Paywall.guard({ action, onAllow: fn })
+      else fn()
+    }
+
     $('#btn-pdf', mount).addEventListener('click', () => {
-      const w = window.open('', '_blank')
-      if (!w) return F.UI.toast('Popup blocked', 'error')
-      const title = tool.title + ' — Yahavi Forge'
-      const content = $('#output', mount).innerHTML
-      w.document.write(`<!doctype html><meta charset="utf-8"><title>${escText(title)}</title>
-        <style>body{font-family:'Space Grotesk',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a}
-        h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.01em}
-        strong{background:#ffea00;padding:0 3px}code{font-family:'JetBrains Mono',monospace;background:#0a0a0a;color:#faf6e9;padding:1px 5px}
-        hr{border:none;border-top:2px solid #0a0a0a;margin:16px 0}
-        @media print { body { margin: 0; padding: 0 24px } button { display: none } }
-        </style>
-        <h1>${escText(tool.title)}</h1>
-        <p style="color:#6b6b6b;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">▸ Yahavi Forge by Hackknow · ${new Date().toLocaleDateString()}</p>
-        ${content}
-        <script>setTimeout(()=>window.print(),300)<\/script>`)
+      guard('pdf', () => {
+        const w = window.open('', '_blank')
+        if (!w) return F.UI.toast('Popup blocked', 'error')
+        const title = tool.title + ' — Yahavi Forge'
+        const content = $('#output', mount).innerHTML
+        w.document.write(`<!doctype html><meta charset="utf-8"><title>${escText(title)}</title>
+          <style>body{font-family:'Space Grotesk',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a}
+          h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+          strong{background:#ffea00;padding:0 3px}code{font-family:'JetBrains Mono',monospace;background:#0a0a0a;color:#faf6e9;padding:1px 5px}
+          hr{border:none;border-top:2px solid #0a0a0a;margin:16px 0}
+          @media print { body { margin: 0; padding: 0 24px } button { display: none } }
+          </style>
+          <h1>${escText(tool.title)}</h1>
+          <p style="color:#6b6b6b;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">▸ Yahavi Forge by Hackknow · ${new Date().toLocaleDateString()}</p>
+          ${content}
+          <script>setTimeout(()=>window.print(),300)<\/script>`)
+        maybeAskForReview()
+      })
     })
     $('#btn-html', mount).addEventListener('click', () => {
-      const html = $('#output', mount).innerHTML
-      const blob = new Blob(
-        [
-          `<!doctype html><meta charset="utf-8"><title>${escText(
-            tool.title
-          )} — Yahavi Forge</title>
-        <style>body{font-family:'Space Grotesk',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a;background:#faf6e9}
-        h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase}strong{background:#ffea00;padding:0 3px}</style>
-        <h1>${escText(tool.title)}</h1>${html}`,
-        ],
-        { type: 'text/html;charset=utf-8' }
-      )
-      const a = document.createElement('a')
-      a.href = URL.createObjectURL(blob)
-      a.download = `yahavi-forge-${id}.html`
-      a.click()
-      setTimeout(() => URL.revokeObjectURL(a.href), 5000)
-      maybeAskForReview()
+      guard('html', () => {
+        const html = $('#output', mount).innerHTML
+        const blob = new Blob(
+          [
+            `<!doctype html><meta charset="utf-8"><title>${escText(
+              tool.title
+            )} — Yahavi Forge</title>
+          <style>body{font-family:'Space Grotesk',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a;background:#faf6e9}
+          h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase}strong{background:#ffea00;padding:0 3px}</style>
+          <h1>${escText(tool.title)}</h1>${html}`,
+          ],
+          { type: 'text/html;charset=utf-8' }
+        )
+        const a = document.createElement('a')
+        a.href = URL.createObjectURL(blob)
+        a.download = `yahavi-forge-${id}.html`
+        a.click()
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000)
+        maybeAskForReview()
+      })
     })
     // v3 — Push to Resume: save the AI output as a Resume row in localStorage so
     // the user can come back to it from the Builder.
     const pushBtn = $('#btn-push-resume', mount)
     if (pushBtn) {
       pushBtn.addEventListener('click', () => {
-        const out = $('#output', mount)
-        const raw = out?.dataset?.raw || out?.innerText || ''
-        if (!raw.trim()) return
-        const list = F.state.loadResumes ? F.state.loadResumes() : []
-        const entry = {
-          id: 'r_' + Date.now().toString(36),
-          title: `${tool.title} · ${new Date().toLocaleDateString()}`,
-          source_tool: id,
-          content: raw,
-          created_at: new Date().toISOString(),
-        }
-        list.unshift(entry)
-        if (F.state.saveResumes) F.state.saveResumes(list.slice(0, 50))
-        F.UI.toast('▸ Pushed to My Resumes (saved on this device)', 'success')
-        maybeAskForReview()
+        guard('push', () => {
+          const out = $('#output', mount)
+          const raw = out?.dataset?.raw || out?.innerText || ''
+          if (!raw.trim()) return
+          const list = F.state.loadResumes ? F.state.loadResumes() : []
+          const entry = {
+            id: 'r_' + Date.now().toString(36),
+            title: `${tool.title} · ${new Date().toLocaleDateString()}`,
+            source_tool: id,
+            content: raw,
+            created_at: new Date().toISOString(),
+          }
+          list.unshift(entry)
+          if (F.state.saveResumes) F.state.saveResumes(list.slice(0, 50))
+          F.UI.toast('▸ Pushed to My Resumes (saved on this device)', 'success')
+          maybeAskForReview()
+        })
       })
     }
   }
 
-  /* per-export review prompt — at most one ask per session, capped per-key/30days */
+  /* per-export review prompt — at most one ask per session, capped per-key/30days
+     v5 — prefers the new HKForge.Review modal (star rating + comment + coupon trigger). */
   function maybeAskForReview() {
     try {
       const askedAt = parseInt(localStorage.getItem('yahavi-forge-reviewed-at') || '0', 10)
       if (askedAt && Date.now() - askedAt < 30 * 24 * 60 * 60 * 1000) return // 30-day cooldown
       if (sessionStorage.getItem('yahavi-forge-review-asked')) return
       sessionStorage.setItem('yahavi-forge-review-asked', '1')
-      setTimeout(showReviewModal, 900)
+      // Bump export count for paywall stats + review eligibility
+      try {
+        const C = root.HKForge && root.HKForge.Coupon
+        if (C) C.bumpExportCount()
+      } catch {}
+      setTimeout(() => {
+        const R = root.HKForge && root.HKForge.Review
+        if (R && R.open) R.open({ trigger: 'post-export' })
+        else showReviewModal() // fallback to legacy social-share modal
+        localStorage.setItem('yahavi-forge-reviewed-at', String(Date.now()))
+      }, 900)
     } catch {}
   }
   function showReviewModal() {

@@ -1144,3 +1144,74 @@ html, body, .panel, .nav-bar, .sidebar, .drawer, .feature-card,
 input.input-xl:focus, textarea.input-xl:focus {
   box-shadow: 5px 5px 0 var(--yellow);
 }
+
+/* ============================================================
+   v5 — Dark theme refresh (grey/minimal, NOT pure black)
+   ============================================================ */
+:root[data-theme="dark"] {
+  --paper: #1a1a1f;
+  --paper-warm: #232328;
+  --paper-dark: #0d0d10;
+  --ink: #eef0ed;
+  --ink-soft: #c2c2bd;
+  --ink-faint: #8a8a85;
+  --rule: #eef0ed;
+  --card: #232328;
+  --card-warm: #2a2a30;
+  --shadow-sm: 3px 3px 0 #000;
+  --shadow-md: 6px 6px 0 #000;
+  --shadow-lg: 10px 10px 0 #000;
+  --shadow-yellow: 6px 6px 0 var(--yellow);
+  --shadow-pink: 6px 6px 0 var(--pink);
+  --shadow-lime: 6px 6px 0 var(--lime);
+  --border-thin: 2px solid #4a4a52;
+  --border: 3px solid #4a4a52;
+  --border-thick: 4px solid #4a4a52;
+}
+
+/* On dark: panel-dark / black-bg blocks become slightly lighter so text stays readable */
+:root[data-theme="dark"] .panel-dark,
+:root[data-theme="dark"] .land-final-card,
+:root[data-theme="dark"] .panel.dark {
+  background: #2f2f37 !important;
+  color: var(--ink) !important;
+}
+
+/* On dark: panel-yellow / panel-pink / panel-lime keep their bright bg
+   but text contrast on these is forced to dark */
+:root[data-theme="dark"] .panel-yellow,
+:root[data-theme="dark"] .panel-pink,
+:root[data-theme="dark"] .panel-lime {
+  color: #0a0a0a !important;
+}
+:root[data-theme="dark"] .panel-yellow *,
+:root[data-theme="dark"] .panel-lime * { color: #0a0a0a !important; }
+:root[data-theme="dark"] .panel-pink * { color: var(--paper) !important; }
+
+/* Compare list — fix invisible items on dark */
+:root[data-theme="dark"] .compare-col.panel { background: var(--card); }
+:root[data-theme="dark"] .compare-list { color: var(--ink); }
+
+/* Status pills on dark — readable */
+:root[data-theme="dark"] .status-pill { background: var(--card-warm); color: var(--ink); }
+:root[data-theme="dark"] .btn-settings { color: var(--paper); }
+
+/* Brand-mark on dark */
+:root[data-theme="dark"] .brand-mark { color: #0a0a0a; }
+
+/* "Minimalist" = dim is now a true minimal */
+:root[data-theme="dim"] {
+  --paper: #f5f3eb;
+  --paper-warm: #ece9dd;
+  --ink: #1a1a1a;
+  --ink-soft: #404040;
+  --ink-faint: #6b6b6b;
+  --card: #ffffff;
+  --card-warm: #fbf9f0;
+  --border-thin: 1px solid #1a1a1a;
+  --border: 2px solid #1a1a1a;
+  --border-thick: 2px solid #1a1a1a;
+  --shadow-sm: 2px 2px 0 #1a1a1a;
+  --shadow-md: 4px 4px 0 #1a1a1a;
+  --shadow-lg: 6px 6px 0 #1a1a1a;
+}

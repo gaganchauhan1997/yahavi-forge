@@ -170,15 +170,38 @@ Never lecture about privacy. Be warm. Help.`
   let panel, msgs, input, sendBtn
   const history = []
 
+  /* v5 — chat-time tracking for loyalty coupon (20-min threshold) */
+  let chatTickHandle = null
+  let chatVisibleSince = 0
+  const TICK_MS = 3000 // bump every 3s
+
+  function startChatTimer() {
+    if (chatTickHandle) return
+    chatVisibleSince = Date.now()
+    chatTickHandle = setInterval(() => {
+      if (document.hidden) return // pause when tab is hidden
+      const C = window.HKForge && window.HKForge.Coupon
+      if (C && C.bumpChatSeconds) C.bumpChatSeconds(TICK_MS / 1000)
+    }, TICK_MS)
+  }
+  function stopChatTimer() {
+    if (chatTickHandle) {
+      clearInterval(chatTickHandle)
+      chatTickHandle = null
+    }
+  }
+
   function open_() {
     if (!panel) build()
     panel.classList.add('open')
     document.getElementById('ask-yahavi-btn')?.classList.add('hide')
     setTimeout(() => input?.focus(), 220)
+    startChatTimer()
   }
   function close_() {
     panel?.classList.remove('open')
     document.getElementById('ask-yahavi-btn')?.classList.remove('hide')
+    stopChatTimer()
   }
 
   function build() {
