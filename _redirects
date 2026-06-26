@@ -1,4 +1,3 @@
-# Cloudflare Pages serves /login from /login.html automatically.
-# Explicit clean-URL routes:
-/app        /app.html       200
-/signin     /login          301
+# Cloudflare Pages auto-strips .html, so /app.html is served at /app natively.
+# Just an alias for old-style /signin → /login.
+/signin   /login   301
