@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Settings — Yahavi Forge</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Archivo+Black&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="forge-ui.css" />
+<link rel="stylesheet" href="landing.css" />
+<script src="js/theme.js"></script>
+<style>
+  :root { --font-ui: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif; }
+  .settings-main { max-width: 760px; margin: 0 auto; padding: 32px 24px 120px; }
+  .set-section { margin-bottom: 28px; padding: 22px 24px; background: var(--card); border: var(--border); box-shadow: var(--shadow-sm); }
+  .set-title { font-family: 'Archivo Black', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .set-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px dotted var(--ink); gap: 14px; flex-wrap: wrap; }
+  .set-row:last-child { border-bottom: none; }
+  .set-label { font-family: var(--font-ui); font-size: 14px; font-weight: 600; flex: 1; min-width: 200px; }
+  .set-fine { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-faint); margin-top: 4px; letter-spacing: 0.02em; line-height: 1.5; }
+  .set-danger { background: var(--pink) !important; color: var(--paper) !important; border-color: var(--ink); }
+  .set-danger:hover { background: var(--ink) !important; }
+
+  .theme-pick { display: flex; gap: 8px; flex-wrap: wrap; }
+  .theme-pick button { padding: 8px 16px; background: var(--card); border: var(--border-thin); cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .theme-pick button.active { background: var(--ink); color: var(--paper); }
+
+  .accent-pick { display: flex; gap: 8px; }
+  .accent-swatch { width: 30px; height: 30px; border: 3px solid transparent; cursor: pointer; border-radius: 2px; transition: transform .1s; }
+  .accent-swatch.active { border-color: var(--ink); box-shadow: 2px 2px 0 var(--ink); transform: scale(1.1); }
+
+  .upload-zone { border: 2px dashed var(--ink); background: var(--paper-warm); padding: 20px; text-align: center; cursor: pointer; transition: background .15s; margin-top: 10px; display: block; }
+  .upload-zone:hover, .upload-zone.drag { background: var(--yellow); }
+  .upload-zone input[type="file"] { display: none; }
+  .upload-zone-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .upload-zone-sub { font-family: var(--font-ui); font-size: 12px; color: var(--ink-faint); margin-top: 4px; }
+  .upload-list { margin-top: 10px; }
+  .upload-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; background: var(--paper-warm); border: 1px solid var(--ink); margin-bottom: 6px; }
+  .upload-item-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .upload-item-del { background: none; border: none; cursor: pointer; font-size: 14px; color: var(--pink); font-weight: 800; padding: 2px 6px; }
+
+  .history-list { margin-top: 10px; max-height: 280px; overflow-y: auto; }
+  .history-item { padding: 10px 12px; border: 1px solid var(--ink); margin-bottom: 6px; background: var(--paper-warm); cursor: pointer; }
+  .history-item:hover { background: var(--yellow); }
+  .history-title { font-family: var(--font-ui); font-size: 13px; font-weight: 700; }
+  .history-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-faint); margin-top: 2px; }
+  .history-empty { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-faint); padding: 12px 0; text-align: center; }
+
+  .consent-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .consent-chip { padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; border: var(--border-thin); cursor: pointer; background: var(--card); }
+  .consent-chip.active { background: var(--ink); color: var(--paper); }
+
+  .brightness-row { display: flex; align-items: center; gap: 10px; }
+  .brightness-row input[type="range"] { flex: 1; max-width: 200px; }
+
+  /* Theme grid */
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px; width: 100%;
+  }
+  .theme-card {
+    border: 2px solid var(--ink); cursor: pointer;
+    transition: transform .1s, box-shadow .1s;
+    overflow: hidden;
+  }
+  .theme-card:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+  .theme-card.active { outline: 3px solid var(--pink); outline-offset: 2px; }
+  .tc-swatch {
+    height: 52px; display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
+  .tc-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(0,0,0,.2); }
+  .tc-body { padding: 8px 10px; }
+  .tc-name { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 800;
+    letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; }
+  .tc-feel { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; opacity: 0.65; margin-top: 2px; }
+
+  .set-foot { text-align: center; margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--ink-faint); line-height: 1.8; }
+</style>
+</head>
+<body class="land-body">
+
+<nav class="nav-bar">
+  <a class="brand" href="/" style="border:none;">
+    <div class="brand-mark">Y</div>
+    <span>YAHAVI</span>
+    <span class="brand-sub">FORGE</span>
+  </a>
+  <div class="nav-status">
+    <a class="nav-link" href="/app">App</a>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme">☀</button>
+    <a class="btn-settings" href="/app">▸ BACK TO APP</a>
+  </div>
+</nav>
+
+<main class="settings-main">
+  <h1 style="font-family:'Archivo Black',sans-serif;font-size:32px;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:24px;">Settings</h1>
+
+  <!-- ─── APPEARANCE ─── -->
+  <section class="set-section">
+    <div class="set-title">🎨 Appearance</div>
+
+    <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:14px;padding-bottom:0;">
+      <div>
+        <div class="set-label">Theme</div>
+        <div class="set-fine">10 themes · Nav toggle cycles ⭐ Cyber Yellow → Matrix → Tokyo</div>
+      </div>
+      <div class="theme-grid" id="theme-grid">
+        <!-- Rendered by JS below -->
+      </div>
+    </div>
+
+    <div class="set-row">
+      <div>
+        <div class="set-label">Brightness</div>
+        <div class="set-fine">Adjust for late-night sessions</div>
+      </div>
+      <div class="brightness-row">
+        <span style="font-size:13px;">☀</span>
+        <input type="range" id="brightness-slider" min="0.6" max="1.3" step="0.05" value="1" />
+        <span style="font-size:13px;">◐</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESUME UPLOADS ─── -->
+  <section class="set-section">
+    <div class="set-title">📄 Resume Uploads</div>
+    <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:10px;padding-bottom:0;">
+      <div>
+        <div class="set-label">Upload your resume</div>
+        <div class="set-fine">TXT, PDF, or image — stored locally, pre-fills tool inputs automatically. Max 5MB.</div>
+      </div>
+      <label class="upload-zone" id="upload-zone">
+        <input type="file" id="resume-file-input" accept=".txt,.pdf,image/*" />
+        <div class="upload-zone-label">▸ Click to upload · Drag &amp; Drop</div>
+        <div class="upload-zone-sub">TXT · PDF · JPG · PNG — stays in your browser only</div>
+      </label>
+      <div class="upload-list" id="upload-list"></div>
+    </div>
+  </section>
+
+  <!-- ─── API KEYS ─── -->
+  <section class="set-section">
+    <div class="set-title">🔑 API Keys</div>
+    <div class="set-row">
+      <div>
+        <div class="set-label">Manage provider keys</div>
+        <div class="set-fine" id="keys-status">Loading…</div>
+      </div>
+      <a class="btn btn-primary" href="/app">▸ OPEN KEYS PANEL</a>
+    </div>
+    <div class="set-row">
+      <div>
+        <div class="set-label" style="color:var(--pink);">Revoke ALL keys</div>
+        <div class="set-fine">Removes keys from this browser. To fully revoke, visit the provider dashboard (Groq, Gemini, etc.).</div>
+      </div>
+      <button class="btn set-danger" id="revoke-all" type="button">▸ REVOKE ALL</button>
+    </div>
+  </section>
+
+  <!-- ─── HISTORY ─── -->
+  <section class="set-section">
+    <div class="set-title">📋 Output History</div>
+    <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:10px;padding-bottom:0;">
+      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:10px;">
+        <div>
+          <div class="set-label">Saved outputs</div>
+          <div class="set-fine" id="history-status">Loading…</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-ghost" id="export-history" type="button">▸ EXPORT JSON</button>
+          <button class="btn set-danger" id="clear-history" type="button">▸ CLEAR</button>
+        </div>
+      </div>
+      <div class="history-list" id="history-list"></div>
+    </div>
+    <div class="set-row">
+      <div>
+        <div class="set-label" style="color:var(--pink);">Clear ALL local data</div>
+        <div class="set-fine">Deletes keys, drafts, history, uploads, prefs from this browser. Cannot be undone.<br>Clearing browser cache has the same effect.</div>
+      </div>
+      <button class="btn set-danger" id="clear-all" type="button">▸ CLEAR EVERYTHING</button>
+    </div>
+  </section>
+
+  <!-- ─── COOKIE / PRIVACY PREFERENCES ─── -->
+  <section class="set-section">
+    <div class="set-title">🍪 Privacy Preferences</div>
+    <div class="set-row">
+      <div>
+        <div class="set-label">Cookie consent</div>
+        <div class="set-fine">Controls what Forge may store on this device beyond essential keys.</div>
+      </div>
+      <div class="consent-chips" id="consent-chips">
+        <button class="consent-chip" data-consent="essential" type="button">Essential Only</button>
+        <button class="consent-chip" data-consent="all" type="button">▸ Accept All</button>
+      </div>
+    </div>
+    <div class="set-row">
+      <div>
+        <div class="set-label">Policies</div>
+        <div class="set-fine">See exactly what we store and why — plain language.</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <a class="btn btn-ghost" href="/privacy">Privacy</a>
+        <a class="btn btn-ghost" href="/cookies">Cookies</a>
+        <a class="btn btn-ghost" href="/terms">Terms</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ACCOUNT ─── -->
+  <section class="set-section">
+    <div class="set-title">👤 Account</div>
+    <div class="set-row">
+      <div>
+        <div class="set-label" id="account-status">Not signed in</div>
+        <div class="set-fine">Sign in to sync resumes and history across devices</div>
+      </div>
+      <a class="btn btn-primary" id="signin-btn" href="/login">▸ SIGN IN</a>
+    </div>
+    <div class="set-row" id="logout-row" style="display:none;">
+      <div>
+        <div class="set-label">Sign out</div>
+        <div class="set-fine">Your cloud data stays. Local data on this device remains.</div>
+      </div>
+      <button class="btn set-danger" id="logout-btn" type="button">▸ LOGOUT</button>
+    </div>
+  </section>
+
+  <div class="set-foot">
+    ▸ All data stored locally on your device — Hackknow never receives it.<br>
+    <a href="/privacy">Privacy Policy</a> · <a href="/cookies">Cookie Policy</a> · <a href="/terms">Terms</a> · <a href="mailto:team@hackknow.com">team@hackknow.com</a>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="hk-auth.js"></script>
+<script src="forge-ui.js"></script>
+<script src="js/cookie-consent.js"></script>
+<script>
+(function () {
+  'use strict'
+  const $ = (s) => document.querySelector(s)
+  const NS = 'yahavi-forge'
+  function safe(k, fb) { try { return JSON.parse(localStorage.getItem(k) || JSON.stringify(fb)) } catch { return fb } }
+  function loadKeys()    { return safe(NS + '-keys', {}) }
+  function loadResumes() { return safe(NS + '-resumes', []) }
+  function saveResumes(arr) { try { localStorage.setItem(NS + '-resumes', JSON.stringify(arr)) } catch {} }
+  function loadUploads() { return safe(NS + '-uploads', []) }
+  function saveUploads(arr) { try { localStorage.setItem(NS + '-uploads', JSON.stringify(arr)) } catch {} }
+  function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+
+  /* ─── Theme grid ─── */
+  const THEMES_ORDERED = [
+    { id:'cyber-yellow', label:'⭐ Cyber Yellow', bg:'#F5F0E6', p:'#FFD400', a:'#FF2E63', t:'#111111', feel:'HackKnow Identity' },
+    { id:'matrix',       label:'🟩 Matrix Hacker', bg:'#0B0F0C', p:'#39FF14', a:'#00D9FF', t:'#F5F5F5', feel:'Hacker Terminal' },
+    { id:'synthwave',    label:'🌈 Synthwave',    bg:'#1A102B', p:'#FF2E88', a:'#00E5FF', t:'#FFFFFF', feel:'Future Retro' },
+    { id:'tokyo',        label:'🌌 Tokyo Night',  bg:'#121826', p:'#7AA2F7', a:'#BB9AF7', t:'#E5E9F0', feel:'Premium Tech' },
+    { id:'dracula',      label:'🧛 Dracula',      bg:'#282A36', p:'#BD93F9', a:'#50FA7B', t:'#F8F8F2', feel:'Coding Theme' },
+    { id:'github-dark',  label:'💻 GitHub Dark', bg:'#0D1117', p:'#58A6FF', a:'#F85149', t:'#C9D1D9', feel:'Professional' },
+    { id:'amber',        label:'🟡 Amber',        bg:'#111111', p:'#FFC107', a:'#FF9800', t:'#FFF8E1', feel:'CRT Hacker' },
+    { id:'neo-mint',     label:'🌿 Neo Mint',     bg:'#EEFDF7', p:'#00C896', a:'#111111', t:'#222222', feel:'Modern Startup' },
+    { id:'crimson',      label:'🔴 Crimson Forge',bg:'#160A0A', p:'#FF3B30', a:'#FFD400', t:'#FFFFFF', feel:'Powerful AI' },
+    { id:'arctic',       label:'❄️ Arctic Glass', bg:'#F5F8FC', p:'#4F8EF7', a:'#8A5CF6', t:'#111111', feel:'Apple Premium' },
+  ]
+
+  function renderThemeGrid() {
+    const grid = $('#theme-grid')
+    const cur = document.documentElement.getAttribute('data-theme') || 'cyber-yellow'
+    grid.innerHTML = THEMES_ORDERED.map(th => `
+      <div class="theme-card${th.id === cur ? ' active' : ''}" data-theme="${th.id}" title="${th.feel}" role="button" tabindex="0">
+        <div class="tc-swatch" style="background:${th.bg};">
+          <div class="tc-dot" style="background:${th.p};"></div>
+          <div class="tc-dot" style="background:${th.a};"></div>
+          <div class="tc-dot" style="background:${th.t};opacity:.7;"></div>
+        </div>
+        <div class="tc-body" style="background:${th.bg};color:${th.t};">
+          <div class="tc-name">${th.label}</div>
+          <div class="tc-feel">${th.feel}</div>
+        </div>
+      </div>`).join('')
+
+    grid.querySelectorAll('.theme-card').forEach(card => {
+      const activate = () => {
+        const t = card.dataset.theme
+        if (window.HKForge && window.HKForge.theme) window.HKForge.theme.apply(t)
+        else { document.documentElement.setAttribute('data-theme', t); try { localStorage.setItem('yahavi-forge-theme', t) } catch {} }
+        renderThemeGrid()
+      }
+      card.addEventListener('click', activate)
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate() } })
+    })
+  }
+  renderThemeGrid()
+  window.addEventListener('hk:theme', renderThemeGrid)
+
+  /* ─── Brightness ─── */
+  const bs = $('#brightness-slider')
+  const savedB = localStorage.getItem(NS + '-prefs-brightness')
+  if (savedB) { bs.value = savedB; document.documentElement.style.filter = 'brightness(' + savedB + ')' }
+  bs.addEventListener('input', () => {
+    document.documentElement.style.filter = 'brightness(' + bs.value + ')'
+    try { localStorage.setItem(NS + '-prefs-brightness', bs.value) } catch {}
+  })
+
+  /* ─── Keys ─── */
+  function refreshKeys() {
+    const keys = loadKeys()
+    const n = Object.values(keys).filter(Boolean).length
+    $('#keys-status').textContent = n === 0 ? 'No keys configured' : `${n} key${n > 1 ? 's' : ''} active: ${Object.keys(keys).filter(k => keys[k]).join(', ')}`
+  }
+  refreshKeys()
+  $('#revoke-all').addEventListener('click', () => {
+    if (!confirm('Remove all API keys from this device?')) return
+    localStorage.removeItem(NS + '-keys'); refreshKeys()
+  })
+
+  /* ─── Uploads ─── */
+  const fileInput  = $('#resume-file-input')
+  const uploadList = $('#upload-list')
+  const uploadZone = $('#upload-zone')
+
+  function renderUploads() {
+    const arr = loadUploads()
+    if (!arr.length) { uploadList.innerHTML = ''; return }
+    uploadList.innerHTML = arr.map((u, i) =>
+      `<div class="upload-item">
+        <span class="upload-item-name">${esc(u.name)}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-faint);">${esc(u.date)}</span>
+        <button class="upload-item-del" data-idx="${i}" type="button" title="Remove">✕</button>
+      </div>`).join('')
+    uploadList.querySelectorAll('.upload-item-del').forEach(btn =>
+      btn.addEventListener('click', () => {
+        const a = loadUploads(); a.splice(Number(btn.dataset.idx), 1); saveUploads(a); renderUploads()
+      })
+    )
+  }
+  renderUploads()
+
+  function handleFile(file) {
+    if (!file) return
+    if (file.size > 5 * 1024 * 1024) { alert('File too large. Max 5MB.'); return }
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const entry = { name: file.name, type: file.type, date: new Date().toLocaleDateString(), dataUrl: e.target.result }
+      const arr = loadUploads(); arr.unshift(entry); saveUploads(arr.slice(0, 10)); renderUploads()
+    }
+    reader.readAsDataURL(file)
+  }
+  fileInput.addEventListener('change', () => handleFile(fileInput.files[0]))
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag') })
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'))
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault(); uploadZone.classList.remove('drag')
+    handleFile(e.dataTransfer?.files?.[0])
+  })
+
+  /* ─── History ─── */
+  const histList   = $('#history-list')
+  const histStatus = $('#history-status')
+
+  function renderHistory() {
+    const h = loadResumes()
+    histStatus.textContent = h.length === 0 ? 'No outputs saved yet' : `${h.length} item${h.length > 1 ? 's' : ''} (cleared if you clear browser cache)`
+    histList.innerHTML = !h.length
+      ? '<div class="history-empty">▸ Use any tool → click "PUSH TO RESUME" to save here.</div>'
+      : h.map((it, i) =>
+          `<div class="history-item" data-idx="${i}">
+            <div class="history-title">${esc(it.title || it.id)}</div>
+            <div class="history-meta">${esc(it.source_tool || '')} · ${esc(it.created_at || '')}</div>
+          </div>`).join('')
+    histList.querySelectorAll('.history-item').forEach(el =>
+      el.addEventListener('click', () => {
+        const item = h[Number(el.dataset.idx)]; if (!item) return
+        const w = window.open('', '_blank')
+        w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(item.title||item.id)}</title>
+          <style>body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;max-width:760px;margin:32px auto;padding:0 16px}
+          h1{font-family:'Archivo Black',sans-serif;text-transform:uppercase}pre{white-space:pre-wrap;font-size:13px;line-height:1.6}</style>
+          <h1>${esc(item.title||item.id)}</h1><p style="font-size:11px;color:#888">${esc(item.source_tool||'')} · ${esc(item.created_at||'')}</p>
+          <pre>${esc(item.content||'')}</pre>`)
+      })
+    )
+  }
+  renderHistory()
+
+  $('#export-history').addEventListener('click', () => {
+    const h = loadResumes(); if (!h.length) { alert('Nothing to export.'); return }
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(h, null, 2)], { type: 'application/json' }))
+    a.download = 'yahavi-forge-history.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000)
+  })
+  $('#clear-history').addEventListener('click', () => {
+    if (!confirm('Clear all saved outputs?')) return
+    localStorage.removeItem(NS + '-resumes'); renderHistory()
+  })
+  $('#clear-all').addEventListener('click', () => {
+    if (!confirm('Delete ALL local data? Keys, history, drafts, uploads, prefs. Cannot be undone.')) return
+    Object.keys(localStorage).forEach(k => { if (k.startsWith(NS)) localStorage.removeItem(k) })
+    refreshKeys(); renderHistory(); renderUploads(); alert('All local data cleared.')
+  })
+
+  /* ─── Cookie prefs ─── */
+  function syncConsent() {
+    const cur = window.HKConsent ? window.HKConsent.getConsent() : null
+    $('#consent-chips').querySelectorAll('.consent-chip').forEach(b =>
+      b.classList.toggle('active', b.dataset.consent === cur)
+    )
+  }
+  syncConsent()
+  $('#consent-chips').querySelectorAll('.consent-chip').forEach(b =>
+    b.addEventListener('click', () => {
+      if (window.HKConsent) window.HKConsent.setConsent(b.dataset.consent)
+      syncConsent()
+    })
+  )
+
+  /* ─── Account ─── */
+  async function loadAccount() {
+    if (!window.HKAuth) return
+    const user = await window.HKAuth.getUser()
+    if (user) {
+      $('#account-status').textContent = `Signed in as ${user.email || user.id}`
+      $('#signin-btn').style.display = 'none'
+      $('#logout-row').style.display = 'flex'
+    }
+  }
+  $('#logout-btn')?.addEventListener('click', async () => {
+    if (window.HKAuth?.signOut) await window.HKAuth.signOut()
+    location.replace('/')
+  })
+  loadAccount()
+})()
+</script>
+</body>
+</html>
