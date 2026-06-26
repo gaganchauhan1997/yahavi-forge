@@ -45,10 +45,55 @@
         ${items}
       </div>`
     }).join('')
-    nav.innerHTML = groups
-    nav.querySelectorAll('.nav-tab').forEach((b) =>
+
+    // v3: append My Account + Resources sections + KEYS button pinned at bottom
+    const accountSection = `
+      <div class="sidebar-section">
+        <div class="sidebar-group-label">▸ My Account</div>
+        <ul class="sidebar-foot-links">
+          <li><a href="#/profile" data-link="profile">👤 Profile</a></li>
+          <li><a href="#/settings" data-link="settings">⚙ Settings</a></li>
+          <li><a href="/#pricing" data-link="pricing">💎 Pricing</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-group-label">▸ Resources</div>
+        <ul class="sidebar-foot-links">
+          <li><a href="/#tutorial" data-link="help">📘 Tutorial</a></li>
+          <li><a href="mailto:team@hackknow.com">✉ team@hackknow.com</a></li>
+          <li><a href="/terms">📜 Terms</a></li>
+          <li><a href="/privacy">🔒 Privacy</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section" style="border-top:none;padding-top:0;">
+        <button class="sidebar-keys" id="sidebar-keys-btn" type="button" aria-label="Open API keys panel">
+          <span class="key-dot"></span>
+          <span class="sidebar-keys-label">▸ API KEYS — ADD ONE</span>
+        </button>
+        <div class="brightness-row">
+          <span>☀</span>
+          <input type="range" id="brightness-slider" min="0.6" max="1.3" step="0.05" value="1" aria-label="Brightness" />
+          <span>◐</span>
+        </div>
+      </div>
+    `
+    nav.innerHTML = groups + accountSection
+    nav.querySelectorAll('.nav-tab[data-tool]').forEach((b) =>
       b.addEventListener('click', () => go(b.dataset.tool))
     )
+    const kBtn = $('#sidebar-keys-btn', nav)
+    if (kBtn) kBtn.addEventListener('click', openDrawer)
+    updateSidebarKeysState()
+    if (window.HKForge && window.HKForge.theme && window.HKForge.theme.init) window.HKForge.theme.init()
+  }
+
+  function updateSidebarKeysState() {
+    const btn = $('#sidebar-keys-btn')
+    if (!btn) return
+    const n = F.state.activeKeyCount()
+    btn.classList.toggle('has-keys', n > 0)
+    const label = btn.querySelector('.sidebar-keys-label')
+    if (label) label.textContent = n === 0 ? '▸ API KEYS — ADD ONE' : `▸ ${n} KEY${n > 1 ? 'S' : ''} ACTIVE`
   }
 
   /* ─────── routing (URL hash) ─────── */
@@ -120,6 +165,7 @@
 
   function updateConnectionStatus() {
     const n = F.state.activeKeyCount()
+    updateSidebarKeysState()
     const el = $('#connection-status')
     if (!el) return
     if (n === 0) {

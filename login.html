@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
+<script src="js/theme.js"></script>
 <link rel="stylesheet" href="forge-ui.css" />
 <style>
   /* Login-only layout — built on the shared brutalist tokens */
@@ -104,12 +105,12 @@
     <form id="email-form">
       <div class="form-group">
         <label class="form-label" for="email">Email</label>
-        <input type="email" id="email" autocomplete="email" placeholder="you@domain.com" required />
+        <input type="email" id="email" autocomplete="email" placeholder="you@domain.com" required class="input-xl" />
       </div>
 
       <div class="form-group pw-field" id="pw-wrap">
         <label class="form-label" for="password">Password</label>
-        <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" minlength="6" />
+        <input type="password" id="password" autocomplete="current-password" placeholder="••••••••" minlength="6" class="input-xl" />
         <div class="input-hint" id="pw-hint">▸ 6+ characters</div>
       </div>
 

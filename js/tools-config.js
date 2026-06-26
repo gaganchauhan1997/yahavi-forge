@@ -261,7 +261,7 @@ Rules: each bullet ≤ 25 words, action verb start, quantified where reasonable,
 
     /* ═════════════════════════ ANALYZE ═════════════════════════ */
     ats: {
-      title: 'Career Intelligence Report',
+      title: 'ATS Career Intelligence',
       subtitle: 'ATS score · keyword gap · recruiter perception · rewrite engine',
       category: 'analyze',
       num: '06',
@@ -650,7 +650,9 @@ Be specific. Numbers, scripts, time blocks.`,
       num: '17',
       icon: '🎤',
       inputs: [
-        { id: 'jd', label: 'Job Description', placeholder: "Paste the JD you're interviewing for.", rows: 10, required: true },
+        { id: 'company', label: 'Company Name (optional)', placeholder: 'e.g. Stripe' },
+        { id: 'sourceUrl', label: 'LinkedIn Job URL (optional)', placeholder: 'https://www.linkedin.com/jobs/view/...' },
+        { id: 'jd', label: 'Job Description', placeholder: "Paste the JD you're interviewing for. (If LinkedIn URL above is set, you can paste just the role title + key responsibilities.)", rows: 10, required: true },
         { id: 'resume', label: 'Resume (optional — personalizes the answers)', placeholder: 'Paste your resume.', rows: 8 },
       ],
       systemPrompt: () => `Build a complete interview prep pack for the candidate.
@@ -668,7 +670,7 @@ Format: "STAR answer for Q#N: [Situation/Task/Action/Result]" — keep each to ~
 ## 7-ITEM PREP CHECKLIST
 Concrete things to do in the 24 hours before the interview.`,
       userPrompt: (i) =>
-        `JOB DESCRIPTION:\n${i.jd}\n\n${i.resume ? `RESUME:\n${i.resume}\n\n` : ''}Build my prep pack now.`,
+        `${i.company ? `COMPANY: ${i.company}\n` : ''}${i.sourceUrl ? `JD URL: ${i.sourceUrl}\n` : ''}\nJOB DESCRIPTION:\n${i.jd}\n\n${i.resume ? `RESUME:\n${i.resume}\n\n` : ''}Build my prep pack now.`,
       temperature: 0.6,
       maxTokens: 3000,
     },

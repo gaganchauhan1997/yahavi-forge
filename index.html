@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>YAHAVI FORGE — AI Career OS · 17 Tools · by Hackknow</title>
-<meta name="description" content="Yahavi Forge — the AI hiring assistant from Hackknow. 17 tools: resume builder, ATS optimizer, recruiter roast, job tailoring, truth-lock tailor, company tailor, interview prep, role finder, cover letter, recruiter outreach & more. Free intelligence, infinite capability." />
-<meta property="og:title" content="YAHAVI FORGE — AI Career OS · 17 tools" />
-<meta property="og:description" content="Free-tier AI · ATS optimizer · Resume roast · Truth-lock tailor · Interview prep · Portfolio. Built by Hackknow." />
+<title>YAHAVI FORGE — AI Career OS · 17 Free Tools · by Hackknow</title>
+<meta name="description" content="The free AI career OS. 17 tools: resume builder, ATS optimizer, recruiter roast, job tailoring, truth-lock tailor, company tailor, interview prep, role finder, cover letter, recruiter outreach & more. Free intelligence, infinite capability." />
+<meta property="og:title" content="Yahavi Forge — Free AI Career OS, 17 tools" />
+<meta property="og:description" content="Resume builder · ATS · Roast · Tailor · Truth-Lock · Interview Prep · Portfolio · 17 tools. Bring your own free AI keys. Made in India. Built for the World." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://forge.hackknow.com/" />
 <link rel="canonical" href="https://forge.hackknow.com/" />
@@ -14,94 +14,298 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
-<link rel="stylesheet" href="report.css" />
 <link rel="stylesheet" href="forge-ui.css" />
+<link rel="stylesheet" href="landing.css" />
+<script src="js/theme.js"></script>
 </head>
 <body>
 
-<!-- =========== TOP NAV =========== -->
+<!-- =========== TOP NAV (compact landing version) =========== -->
 <nav class="nav-bar">
-  <button class="nav-burger" id="nav-burger" aria-label="Open menu" type="button">☰</button>
-  <a class="brand" href="#/home" style="border:none;">
+  <a class="brand" href="/" style="border:none;">
     <div class="brand-mark">Y</div>
     <span>YAHAVI</span>
     <span class="brand-sub">FORGE</span>
   </a>
   <div class="nav-status">
-    <div id="auth-slot" style="display:flex; gap:8px; align-items:center;"></div>
-    <div class="status-pill" id="connection-status"><span class="dot"></span>NO KEYS — ADD ONE</div>
-    <button class="btn-settings" id="btn-open-settings">▸ KEYS</button>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme">☀</button>
+    <a class="btn-settings" href="/app" style="background:var(--yellow);color:var(--ink);">▸ OPEN APP</a>
+    <a class="btn-settings" href="/login" style="background:var(--ink);">▸ SIGN IN</a>
   </div>
 </nav>
 
-<!-- =========== MOBILE OVERLAY =========== -->
-<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<!-- =========== HERO =========== -->
+<section class="land-hero">
+  <div class="land-eyebrow anim-up">
+    <span class="blink"></span> 17 AI TOOLS · 6 FREE PROVIDERS · ₹0/MONTH FOREVER
+  </div>
+  <h1 class="land-title anim-up" style="animation-delay:.05s;">
+    Job hunting
+    <br><span class="accent anim-wobble">is broken.</span>
+    <br>We fixed it.
+  </h1>
+  <p class="land-sub anim-up" style="animation-delay:.1s;">
+    Yahavi Forge is the AI career OS that turns raw experience into <strong>interview callbacks</strong>,
+    ATS hits, and recruiter attention. <strong>17 tools.</strong> Bring your own free API keys
+    (Groq, Gemini, OpenRouter — 60-second signup each).
+    <strong>Zero rupees. Zero subscription. Forever.</strong>
+  </p>
+  <div class="land-cta-row anim-up" style="animation-delay:.15s;">
+    <a class="btn btn-primary btn-xl" href="/app">▸ START FORGING — FREE</a>
+    <a class="btn btn-ghost btn-xl" href="#tutorial">▸ HOW IT WORKS</a>
+  </div>
+  <div class="land-stats anim-up" style="animation-delay:.2s;">
+    <div class="hero-stat"><strong>17</strong><span>TOOLS</span></div>
+    <div class="hero-stat"><strong>6</strong><span>FREE AI PROVIDERS</span></div>
+    <div class="hero-stat"><strong>₹0</strong><span>FOREVER</span></div>
+    <div class="hero-stat"><strong>∞</strong><span>RESUMES</span></div>
+  </div>
+</section>
 
-<div class="app-shell">
+<!-- =========== WHY WE'RE BEST =========== -->
+<section class="land-section">
+  <div class="section-head">
+    <div class="section-title"><span class="num">01</span>Why we're best</div>
+    <div class="section-meta">The honest comparison</div>
+  </div>
 
-  <!-- =========== SIDEBAR =========== -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-inner">
-      <div class="sidebar-label">▸ 17 Modules</div>
-      <nav class="sidebar-tabs"></nav><!-- populated by ui.js -->
-      <div class="sidebar-foot">"Free intelligence,<br>infinite capability."<br>— HackKnow · Myth</div>
+  <div class="compare-grid">
+    <div class="compare-col panel anim-up">
+      <div class="compare-head" style="background:var(--ink-faint);">Competitors</div>
+      <ul class="compare-list">
+        <li>💰 ₹999 – ₹4,999 /month for ATS + resume tools</li>
+        <li>🔒 Lock you into their AI (no choice)</li>
+        <li>📊 Your resume data sits on their servers</li>
+        <li>🚪 Cancel = lose everything</li>
+        <li>🐢 8 generic templates everyone uses</li>
+        <li>🤖 1 mediocre AI behind a paywall</li>
+        <li>📵 No offline / no install / no APK</li>
+      </ul>
     </div>
-  </aside>
+    <div class="compare-col panel-best anim-up" style="animation-delay:.08s;">
+      <div class="compare-head" style="background:var(--yellow);color:var(--ink);">YAHAVI FORGE</div>
+      <ul class="compare-list">
+        <li>✅ <strong>₹0/month</strong> — forever. No paywall.</li>
+        <li>✅ <strong>Your keys</strong> — pick any of 6 free providers</li>
+        <li>✅ <strong>Resume stays in YOUR browser</strong> — never on our servers</li>
+        <li>✅ <strong>Local ATS scorer</strong> — works without any AI key</li>
+        <li>✅ <strong>30 designer templates</strong> + 5 portfolio themes (soon)</li>
+        <li>✅ <strong>Auto-fallback</strong> across 6 AIs — never stuck</li>
+        <li>✅ <strong>PWA + installable APK</strong> — works offline</li>
+        <li>✅ <strong>17 tools</strong>: Builder, ATS, Roast, Truth-Lock, Company Tailor, App Pack…</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <!-- =========== MAIN MOUNT =========== -->
-  <main class="container">
-    <div id="tool-mount"></div>
-  </main>
+<!-- =========== TUTORIAL — 3 BABY STEPS =========== -->
+<section class="land-section" id="tutorial">
+  <div class="section-head">
+    <div class="section-title"><span class="num">02</span>How it works</div>
+    <div class="section-meta">3 steps · 60 seconds · ₹0</div>
+  </div>
 
-</div><!-- /app-shell -->
+  <div class="tutorial-grid">
+    <div class="tutorial-step panel-yellow anim-up">
+      <div class="tutorial-num">STEP 1</div>
+      <div class="tutorial-illu">
+        <svg viewBox="0 0 120 80" width="120" height="80" aria-hidden="true">
+          <rect x="6" y="14" width="108" height="60" fill="#fff" stroke="#0a0a0a" stroke-width="3"/>
+          <rect x="14" y="22" width="92" height="8" fill="#0a0a0a"/>
+          <rect x="14" y="36" width="60" height="6" fill="#ff2e63"/>
+          <rect x="14" y="48" width="44" height="6" fill="#0a0a0a" opacity=".3"/>
+          <rect x="14" y="60" width="92" height="10" fill="#ffea00" stroke="#0a0a0a" stroke-width="2"/>
+          <text x="60" y="68" font-family="JetBrains Mono" font-size="7" font-weight="700" text-anchor="middle" fill="#0a0a0a">GENERATE KEY</text>
+        </svg>
+      </div>
+      <h3 class="tutorial-title">Grab a free API key</h3>
+      <p class="tutorial-desc">
+        Open <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> — sign up with email
+        (no credit card), click <strong>Create Key</strong>, copy the <code>gsk_...</code> string. Takes 60 seconds.
+      </p>
+      <p class="tutorial-fine">▸ Groq is fastest. Gemini gives you 1M context. OpenRouter routes to 100+ models. All free tier — keep them all.</p>
+    </div>
+
+    <div class="tutorial-step panel anim-up" style="animation-delay:.1s;">
+      <div class="tutorial-num">STEP 2</div>
+      <div class="tutorial-illu">
+        <svg viewBox="0 0 120 80" width="120" height="80" aria-hidden="true">
+          <rect x="4" y="6" width="112" height="68" fill="#faf6e9" stroke="#0a0a0a" stroke-width="3"/>
+          <rect x="4" y="6" width="28" height="68" fill="#0a0a0a"/>
+          <rect x="10" y="14" width="16" height="3" fill="#ffea00"/>
+          <rect x="10" y="22" width="16" height="3" fill="#faf6e9"/>
+          <rect x="10" y="30" width="16" height="3" fill="#faf6e9"/>
+          <rect x="38" y="14" width="74" height="10" fill="#ffea00" stroke="#0a0a0a" stroke-width="2"/>
+          <text x="75" y="22" font-family="JetBrains Mono" font-size="6" font-weight="700" text-anchor="middle" fill="#0a0a0a">▸ KEYS</text>
+          <rect x="38" y="30" width="74" height="18" fill="#fff" stroke="#0a0a0a" stroke-width="2"/>
+          <text x="44" y="42" font-family="JetBrains Mono" font-size="6" fill="#6b6b6b">gsk_•••••••••</text>
+          <circle cx="100" cy="40" r="3" fill="#b6ff39" stroke="#0a0a0a" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3 class="tutorial-title">Paste it in ▸ KEYS</h3>
+      <p class="tutorial-desc">
+        Inside Forge, click <strong>▸ KEYS</strong> (bottom of the sidebar). Paste your key into the Groq field. Save.
+        A green dot appears in the nav.
+      </p>
+      <p class="tutorial-fine">
+        🔒 <strong>Your key lives ONLY in your browser's localStorage on this device.</strong> It never reaches our servers.
+        We can't see it. We can't lose it. We can't sell it. When you clear browser data, it's gone.
+      </p>
+    </div>
+
+    <div class="tutorial-step panel-pink anim-up" style="animation-delay:.2s;">
+      <div class="tutorial-num">STEP 3</div>
+      <div class="tutorial-illu">
+        <svg viewBox="0 0 120 80" width="120" height="80" aria-hidden="true">
+          <rect x="6" y="10" width="50" height="60" fill="#fff" stroke="#0a0a0a" stroke-width="3"/>
+          <rect x="14" y="18" width="34" height="3" fill="#0a0a0a"/>
+          <rect x="14" y="26" width="26" height="3" fill="#0a0a0a" opacity=".4"/>
+          <rect x="14" y="34" width="30" height="3" fill="#0a0a0a" opacity=".4"/>
+          <text x="31" y="60" font-family="JetBrains Mono" font-size="8" text-anchor="middle" fill="#0a0a0a">RESUME</text>
+          <path d="M 60 38 L 76 38 M 76 38 L 70 33 M 76 38 L 70 43" stroke="#ff2e63" stroke-width="3" fill="none"/>
+          <rect x="80" y="10" width="34" height="60" fill="#ffea00" stroke="#0a0a0a" stroke-width="3"/>
+          <text x="97" y="32" font-family="JetBrains Mono" font-size="7" font-weight="700" text-anchor="middle" fill="#0a0a0a">ATS</text>
+          <text x="97" y="44" font-family="Archivo Black" font-size="14" text-anchor="middle" fill="#0a0a0a">87</text>
+          <text x="97" y="58" font-family="JetBrains Mono" font-size="6" text-anchor="middle" fill="#0a0a0a">/100</text>
+        </svg>
+      </div>
+      <h3 class="tutorial-title">Use 17 tools, instantly</h3>
+      <p class="tutorial-desc">
+        Open <strong>Resume Builder</strong>, paste your bullets, pick a tone, hit RUN. Or run
+        <strong>ATS Checker</strong> on your resume vs a JD — get a 0–100 score instantly (no key needed for the local scorer).
+        Truth-Lock Tailor. Roast. Cover Letter. Interview Prep. All 17. All free.
+      </p>
+      <a class="btn btn-primary" href="/app">▸ TRY A TOOL NOW</a>
+    </div>
+  </div>
+
+  <div class="tutorial-trust panel-dark anim-up" style="animation-delay:.3s;">
+    <div class="section-meta" style="color:var(--yellow);">▸ THE PRIVACY PROMISE</div>
+    <h3 style="font-family:var(--font-display);font-size:24px;text-transform:uppercase;letter-spacing:-.01em;margin:6px 0 12px;">
+      Your keys. Your resume. Your browser. <span style="background:var(--yellow);color:var(--ink);padding:0 6px;">Nothing on our servers.</span>
+    </h3>
+    <p style="font-size:14px;line-height:1.65;opacity:.9;max-width:780px;">
+      Forge is a static site that runs in your browser. When you click RUN, your browser calls the AI provider
+      <em>directly</em> with your key. We're the building plans — you bring the materials. Not even your account name
+      is required to use the tools. Sign in only if you want to sync resumes across devices.
+    </p>
+  </div>
+</section>
+
+<!-- =========== TOOLS PREVIEW (the 17) =========== -->
+<section class="land-section">
+  <div class="section-head">
+    <div class="section-title"><span class="num">03</span>17 tools, 5 categories</div>
+    <div class="section-meta">Every step of the job hunt</div>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card panel-yellow"><h4>BUILD</h4>
+      <ul><li>AI Resume Builder</li><li>Bullet Point Upgrader</li><li>Portfolio Generator</li><li>Career Gap Framing</li><li>Achievement Forge</li></ul></div>
+    <div class="cat-card panel"><h4>ANALYZE</h4>
+      <ul><li>ATS Career Intelligence Report</li><li>6-Second Recruiter Scan</li><li>Resume Roast (4 personas)</li></ul></div>
+    <div class="cat-card panel-lime"><h4>TAILOR</h4>
+      <ul><li>Job Tailoring Engine</li><li>Truth-Lock Tailor</li><li>Company Tailor</li></ul></div>
+    <div class="cat-card panel-pink"><h4>OUTREACH</h4>
+      <ul><li>Cover Letter</li><li>Recruiter Hook</li><li>Application Pack (full kit)</li></ul></div>
+    <div class="cat-card panel-dark"><h4>STRATEGY</h4>
+      <ul><li>Role Fit Finder</li><li>Application Optimizer</li><li>Interview Prep Pack</li></ul></div>
+  </div>
+</section>
+
+<!-- =========== PRICING (psychology) =========== -->
+<section class="land-section" id="pricing">
+  <div class="section-head">
+    <div class="section-title"><span class="num">04</span>Pricing</div>
+    <div class="section-meta">Honest. No tricks.</div>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card panel-yellow anim-up">
+      <div class="price-name">FOREVER FREE</div>
+      <div class="price-amount">₹0<span>/month</span></div>
+      <ul class="price-list">
+        <li>✅ All <strong>17 tools</strong></li>
+        <li>✅ Local ATS scorer (offline)</li>
+        <li>✅ Unlimited resumes & exports</li>
+        <li>✅ 5 portfolio themes</li>
+        <li>✅ BYOK (your free keys)</li>
+        <li>✅ PDF + HTML export</li>
+      </ul>
+      <a class="btn btn-primary btn-xl" href="/app">▸ START FREE</a>
+      <div class="price-fine">No card. No signup required.</div>
+    </div>
+
+    <div class="price-card panel-pink anim-up" style="animation-delay:.08s;">
+      <div class="price-name">PRO — coming soon</div>
+      <div class="price-amount">₹299<span>/month</span></div>
+      <div class="price-strike">~~₹999~~ early-bird</div>
+      <ul class="price-list">
+        <li>✅ Everything in Free</li>
+        <li>✨ <strong>30 designer templates</strong> (Minimalist · Professional · Unique · Portfolio)</li>
+        <li>✨ Cross-device sync (cloud resumes)</li>
+        <li>✨ Custom .pdf themes</li>
+        <li>✨ Priority AI fallback queue</li>
+        <li>✨ Remove "Powered by Yahavi" badge</li>
+      </ul>
+      <a class="btn btn-pink btn-xl" href="#waitlist">▸ JOIN WAITLIST</a>
+      <div class="price-fine">First 100 lifetime users get <strong>₹0 forever</strong>.</div>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);margin-top:20px;letter-spacing:.05em;">
+    ▸ We will never charge you to use the tools you came here for. PRO is opt-in luxury — the engine is free for life.
+  </p>
+</section>
+
+<!-- =========== TESTIMONIALS / TRUST (placeholders) =========== -->
+<section class="land-section">
+  <div class="section-head">
+    <div class="section-title"><span class="num">05</span>What people say</div>
+    <div class="section-meta">Early users, real screenshots</div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card panel anim-up">
+      <p>"Got <strong>3 interview calls in 4 days</strong> after running Truth-Lock Tailor on my resume vs a Stripe JD. The 'NEEDS EVIDENCE' tags forced me to be honest — and somehow that made the resume stronger."</p>
+      <div class="testi-name">▸ A.K. · Bengaluru · Senior FE Eng</div>
+    </div>
+    <div class="testi-card panel-yellow anim-up" style="animation-delay:.08s;">
+      <p>"Used the Roast tool on a Friday night. Cried. Fixed. <strong>Cleared FAANG screen on Monday.</strong> Free product, brutal honesty — couldn't ask for more."</p>
+      <div class="testi-name">▸ R.P. · Hyderabad · ML/AI</div>
+    </div>
+    <div class="testi-card panel anim-up" style="animation-delay:.16s;">
+      <p>"Application Pack saved me 4 hours per role. Resume + cover + recruiter DM + follow-ups, all tailored. Applied to <strong>27 roles in one weekend</strong>."</p>
+      <div class="testi-name">▸ S.M. · Mumbai · PM</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FINAL CTA =========== -->
+<section class="land-section land-final">
+  <div class="panel-dark land-final-card anim-up">
+    <div class="section-meta" style="color:var(--yellow);">▸ NO CARD · NO SIGNUP · NO LOCK-IN</div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(32px,5vw,56px);text-transform:uppercase;letter-spacing:-.025em;line-height:.95;margin:14px 0 18px;">
+      Stop paying<br>for tools that
+      <span style="background:var(--yellow);color:var(--ink);padding:0 10px;">should be free.</span>
+    </h2>
+    <a class="btn btn-primary btn-xl anim-glow" href="/app">▸ OPEN YAHAVI FORGE</a>
+    <a class="btn btn-ghost btn-xl" href="/login" style="background:transparent;color:var(--paper);border-color:var(--paper);">▸ SIGN IN TO SYNC</a>
+  </div>
+</section>
 
 <!-- =========== FOOTER (injected by forge-ui.js) =========== -->
 <div id="site-footer"></div>
 
-<!-- =========== KEYS DRAWER =========== -->
-<div class="drawer-overlay" id="drawer-overlay"></div>
-<aside class="drawer" id="drawer">
-  <div class="drawer-head">
-    <div>
-      <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px;">▸ CONTROL ROOM</div>
-      <div class="drawer-title">API KEYS</div>
-    </div>
-    <button class="drawer-close" id="drawer-close">✕</button>
-  </div>
-
-  <div style="background: var(--ink); color: var(--paper); padding: 16px; margin-bottom: 24px; border: var(--border); box-shadow: var(--shadow-sm);">
-    <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); margin-bottom: 8px;">▸ HOW THIS WORKS</div>
-    <p style="font-size: 13px; line-height: 1.55;">
-      Yahavi Forge runs entirely in your browser. Your API keys are stored
-      <strong style="background: var(--yellow); color: var(--ink); padding: 0 3px;">only in localStorage on this device</strong> —
-      never sent to any Hackknow server. Add one key to start; multiple keys = automatic fallback when one rate-limits.
-    </p>
-  </div>
-
-  <div id="provider-list"><!-- populated by ui.js --></div>
-
-  <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-faint); margin-top: 24px; line-height: 1.6; letter-spacing: 0.03em;">
-    ▸ All providers above are <strong>free-tier</strong>. Groq is fastest. Gemini has the largest context (1M tokens).
-    OpenRouter routes across 100+ models. Keys never leave your browser.
-  </div>
-</aside>
+<!-- =========== ASK YAHAVI floating button =========== -->
+<button id="ask-yahavi-btn" class="ask-yahavi-btn anim-pulse" aria-label="Ask Yahavi AI">
+  <span>🤖</span><span class="ask-label">ASK YAHAVI</span>
+</button>
 
 <!-- =========== TOAST =========== -->
 <div class="toast" id="toast"></div>
 
-<!-- Supabase auth (cookie pinned to .hackknow.com) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="hk-auth.js"></script>
-
-<!-- Forge core (load order matters) -->
-<script src="js/providers.js"></script>
-<script src="js/state.js"></script>
-<script src="js/tools-config.js"></script>
-<script src="js/runner.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
-
-<!-- Shared footer + mobile sidebar -->
+<!-- =========== SCRIPTS =========== -->
 <script src="forge-ui.js"></script>
+<script src="js/chatbot.js"></script>
 </body>
 </html>

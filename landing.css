@@ -1,0 +1,239 @@
+/* ============================================================
+   YAHAVI FORGE — LANDING PAGE styles (additive to styles.css)
+   ============================================================ */
+
+.land-hero {
+  max-width: 1180px; margin: 0 auto;
+  padding: 48px 32px 32px;
+  border-bottom: var(--border-thick);
+  text-align: left;
+}
+.land-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--ink); color: var(--paper);
+  padding: 8px 14px; font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; margin-bottom: 24px;
+  box-shadow: 4px 4px 0 var(--pink);
+}
+.land-eyebrow .blink {
+  width: 8px; height: 8px; background: var(--lime);
+  animation: blink 1.2s ease-in-out infinite;
+}
+.land-title {
+  font-family: var(--font-display);
+  font-size: clamp(54px, 9vw, 112px);
+  line-height: 0.92; letter-spacing: -0.04em;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.land-title .accent {
+  color: var(--pink); background: var(--yellow);
+  padding: 0 12px; display: inline-block;
+  border: var(--border-thick); box-shadow: 8px 8px 0 var(--ink);
+}
+.land-sub {
+  font-size: clamp(16px, 2vw, 20px); line-height: 1.5;
+  max-width: 760px; color: var(--ink-soft);
+  margin-bottom: 32px;
+}
+.land-sub strong { background: var(--yellow); color: var(--ink); padding: 0 4px; }
+.land-cta-row {
+  display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px;
+}
+.btn-xl {
+  font-size: 15px !important;
+  padding: 18px 28px !important;
+}
+.land-stats {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.land-stats .hero-stat strong { font-size: 28px; }
+
+.land-section {
+  max-width: 1180px; margin: 0 auto;
+  padding: 56px 32px;
+}
+
+/* compare panels */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+@media (max-width: 880px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-col { padding: 0 !important; overflow: hidden; }
+.compare-head {
+  font-family: var(--font-display); font-size: 22px;
+  text-transform: uppercase; letter-spacing: -0.01em;
+  padding: 18px 22px; color: var(--paper);
+  border-bottom: var(--border);
+}
+.compare-list {
+  list-style: none; padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  font-size: 14px; line-height: 1.5;
+}
+.compare-list li { display: flex; align-items: flex-start; gap: 8px; }
+.panel-best {
+  background: var(--card); border: var(--border-thick);
+  box-shadow: 10px 10px 0 var(--yellow);
+  position: relative;
+}
+.panel-best::before {
+  content: "★ FORGE";
+  position: absolute; top: -14px; right: -8px;
+  background: var(--pink); color: var(--paper);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.15em; padding: 5px 10px;
+  border: var(--border-thin); box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(4deg);
+}
+
+/* tutorial steps */
+.tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-bottom: 32px;
+}
+.tutorial-step {
+  padding: 24px;
+}
+.panel-yellow { background: var(--yellow); border: var(--border); box-shadow: var(--shadow-md); }
+.panel-lime { background: var(--lime); border: var(--border); box-shadow: var(--shadow-md); }
+.panel-pink { background: var(--pink); color: var(--paper); border: var(--border); box-shadow: var(--shadow-md); }
+.panel-dark { background: var(--ink); color: var(--paper); border: var(--border); box-shadow: var(--shadow-md); }
+.tutorial-num {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 14px;
+  background: var(--ink); color: var(--paper);
+  display: inline-block; padding: 4px 10px;
+}
+.panel-pink .tutorial-num { background: var(--paper); color: var(--ink); }
+.tutorial-illu {
+  display: flex; justify-content: center;
+  margin-bottom: 16px;
+  background: var(--paper-warm);
+  border: 2px solid var(--ink);
+  padding: 12px;
+}
+.panel-pink .tutorial-illu { background: rgba(250,246,233,0.08); border-color: var(--paper); }
+.tutorial-title {
+  font-family: var(--font-display); font-size: 22px;
+  text-transform: uppercase; letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.tutorial-desc { font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
+.tutorial-desc code {
+  font-family: var(--font-mono); font-size: 12px;
+  background: var(--ink); color: var(--paper); padding: 1px 6px;
+}
+.tutorial-desc a {
+  font-weight: 600;
+  border-bottom: 2px solid currentColor;
+}
+.tutorial-fine {
+  font-family: var(--font-mono); font-size: 11px;
+  line-height: 1.6; opacity: 0.75; letter-spacing: 0.02em;
+  border-top: 1px dotted currentColor; padding-top: 10px; margin-top: 12px;
+}
+.tutorial-trust {
+  padding: 28px;
+  margin-top: 20px;
+}
+
+/* tools preview grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.cat-card {
+  padding: 20px 22px;
+}
+.cat-card h4 {
+  font-family: var(--font-display); font-size: 18px;
+  text-transform: uppercase; letter-spacing: -0.01em;
+  margin-bottom: 12px;
+  padding-bottom: 8px; border-bottom: 2px solid currentColor;
+}
+.cat-card ul { list-style: none; }
+.cat-card li {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 5px 0;
+}
+
+/* pricing */
+.pricing-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+@media (max-width: 880px) { .pricing-grid { grid-template-columns: 1fr; } }
+.price-card { padding: 28px; text-align: left; }
+.price-name {
+  font-family: var(--font-mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  margin-bottom: 10px;
+}
+.price-amount {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 60px);
+  line-height: 1; letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.price-amount span {
+  font-size: 16px; opacity: 0.65; font-family: var(--font-mono); letter-spacing: 0.05em;
+}
+.price-strike {
+  font-family: var(--font-mono); font-size: 12px;
+  margin-bottom: 18px; opacity: 0.8;
+}
+.price-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 10px;
+  font-size: 14px; line-height: 1.5;
+  margin-bottom: 22px;
+}
+.price-fine {
+  font-family: var(--font-mono); font-size: 10.5px;
+  margin-top: 10px; opacity: 0.85; letter-spacing: 0.04em;
+}
+
+/* testimonials */
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.testi-card { padding: 24px; }
+.testi-card p { font-size: 15px; line-height: 1.55; margin-bottom: 14px; }
+.testi-name {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* final cta */
+.land-final { padding: 24px 32px 64px; }
+.land-final-card {
+  padding: 56px 40px;
+  text-align: center;
+  box-shadow: 12px 12px 0 var(--pink);
+}
+.land-final .btn { margin: 0 6px 10px; }
+
+/* Ask Yahavi floating button */
+.ask-yahavi-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 280;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--pink); color: var(--paper);
+  border: var(--border-thick); padding: 14px 20px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  cursor: pointer; box-shadow: var(--shadow-md);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.ask-yahavi-btn:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--ink); }
+.ask-yahavi-btn span:first-child { font-size: 18px; }
+@media (max-width: 600px) {
+  .ask-yahavi-btn .ask-label { display: none; }
+  .ask-yahavi-btn { padding: 12px 14px; }
+}

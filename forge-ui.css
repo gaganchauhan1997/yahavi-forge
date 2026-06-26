@@ -262,3 +262,156 @@ button.feature-card:focus-visible {
   text-transform: uppercase; color: var(--ink-faint);
   border: 2px dashed var(--ink); padding: 40px; text-align: center;
 }
+
+/* ============================================================
+   v3 — SIDEBAR overhaul (sections + bottom keys + settings/profile/pricing)
+   ============================================================ */
+.sidebar-section { margin: 18px 0 14px; }
+.sidebar-section + .sidebar-section { border-top: 2px dotted var(--ink); padding-top: 14px; }
+
+.sidebar-foot-links {
+  list-style: none; padding: 0 6px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.sidebar-foot-links a {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 7px 8px; color: var(--ink);
+  border: 2px solid transparent;
+  text-decoration: none; border-bottom: none;
+  transition: all 0.1s;
+}
+.sidebar-foot-links a:hover {
+  background: var(--yellow); border-color: var(--ink);
+  transform: translate(-2px, -2px); box-shadow: 3px 3px 0 var(--ink);
+}
+
+/* keys pinned at bottom */
+.sidebar-keys {
+  margin: 16px 6px 8px;
+  padding: 14px 12px;
+  background: var(--pink); color: var(--paper);
+  border: var(--border); box-shadow: var(--shadow-sm);
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer; transition: all 0.1s;
+}
+.sidebar-keys:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
+.sidebar-keys .key-dot {
+  width: 10px; height: 10px; background: var(--ink-faint); border: 2px solid var(--paper);
+}
+.sidebar-keys.has-keys .key-dot { background: var(--lime); }
+
+/* ============================================================
+   v3 — YAHAVI CHAT PANEL
+   ============================================================ */
+.yahavi-chat {
+  position: fixed; bottom: 24px; right: 24px; z-index: 290;
+  width: min(380px, calc(100vw - 32px));
+  height: 540px; max-height: calc(100vh - 100px);
+  background: var(--card); color: var(--ink);
+  border: var(--border-thick); box-shadow: 12px 12px 0 var(--ink);
+  display: none; flex-direction: column;
+  font-family: var(--font-body);
+  animation: slideUp 0.25s ease-out;
+}
+.yahavi-chat.open { display: flex; }
+
+.yahavi-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--ink); color: var(--paper);
+  border-bottom: var(--border);
+}
+.yahavi-title { display: flex; align-items: center; gap: 12px; }
+.yahavi-avatar {
+  font-size: 22px; width: 36px; height: 36px;
+  background: var(--yellow); border: var(--border-thin);
+  display: flex; align-items: center; justify-content: center;
+}
+.yahavi-name { font-family: var(--font-display); font-size: 14px; letter-spacing: -0.01em; text-transform: uppercase; }
+.yahavi-status {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
+  color: var(--yellow); display: flex; align-items: center; gap: 6px;
+}
+.yahavi-status .blink {
+  width: 6px; height: 6px; background: var(--lime);
+  animation: blink 1.2s ease-in-out infinite;
+}
+.yahavi-close {
+  width: 32px; height: 32px; background: var(--pink); color: var(--paper);
+  border: var(--border-thin); cursor: pointer; font-weight: 900;
+}
+
+.yahavi-msgs {
+  flex: 1; overflow-y: auto; padding: 14px;
+  background: var(--paper-warm);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.yahavi-msg { display: flex; }
+.yahavi-msg-user { justify-content: flex-end; }
+.yahavi-bubble {
+  max-width: 86%;
+  padding: 10px 14px;
+  font-size: 13.5px; line-height: 1.5;
+  background: var(--card); border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.yahavi-msg-user .yahavi-bubble {
+  background: var(--yellow); color: var(--ink);
+}
+.yahavi-msg-ai .yahavi-bubble {
+  background: var(--card); color: var(--ink);
+}
+.yahavi-bubble h1, .yahavi-bubble h2, .yahavi-bubble h3 {
+  font-family: var(--font-display); font-size: 14px;
+  text-transform: uppercase; letter-spacing: -0.01em;
+  margin: 6px 0 4px;
+}
+.yahavi-bubble ul, .yahavi-bubble ol { padding-left: 18px; margin: 4px 0; }
+.yahavi-bubble code { font-family: var(--font-mono); font-size: 11.5px; background: var(--ink); color: var(--paper); padding: 0 4px; }
+.yahavi-bubble strong { background: var(--yellow); padding: 0 3px; }
+.yahavi-attrib { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--ink-faint); margin-top: 6px; text-transform: uppercase; }
+
+.yahavi-input-row {
+  display: flex; gap: 8px; padding: 12px 14px;
+  background: var(--card); border-top: var(--border);
+}
+.yahavi-input {
+  flex: 1; padding: 10px 12px;
+  background: var(--paper) !important;
+  border: var(--border) !important;
+  font-family: var(--font-body); font-size: 13px;
+  color: var(--ink) !important; outline: none;
+}
+.yahavi-input:focus { background: var(--yellow) !important; box-shadow: 2px 2px 0 var(--ink); transform: translate(-1px,-1px); }
+.yahavi-send {
+  width: 44px; height: 44px;
+  background: var(--pink); color: var(--paper);
+  border: var(--border); cursor: pointer;
+  font-family: var(--font-display); font-size: 16px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.yahavi-send:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
+.yahavi-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.yahavi-thinking { display: inline-flex; gap: 4px; }
+.yahavi-thinking span {
+  width: 7px; height: 7px; background: var(--ink);
+  animation: pulseHi 1s ease-in-out infinite;
+}
+.yahavi-thinking span:nth-child(2) { animation-delay: 0.15s; }
+.yahavi-thinking span:nth-child(3) { animation-delay: 0.3s; }
+
+.yahavi-fine {
+  padding: 8px 14px; font-family: var(--font-mono);
+  font-size: 9.5px; letter-spacing: 0.04em;
+  color: var(--ink-faint); background: var(--card);
+  border-top: 1px dotted var(--ink);
+}
+
+/* On dark theme: chat panel keeps brutalist contrast */
+:root[data-theme="dark"] .yahavi-bubble { background: var(--card-warm); color: var(--ink); }
+:root[data-theme="dark"] .yahavi-msg-user .yahavi-bubble { background: var(--yellow); color: #0a0a0a; }

@@ -1040,3 +1040,107 @@ select {
   .drawer { padding: 20px 18px 80px; }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
+
+/* ============================================================
+   v3 — THEME SYSTEM (light "paper" default + dark + dim)
+   ============================================================ */
+:root[data-theme="dark"] {
+  --paper: #0d0d0f;
+  --paper-warm: #16161a;
+  --paper-dark: #050505;
+  --ink: #faf6e9;
+  --ink-soft: #c9c7bd;
+  --ink-faint: #6b6b6b;
+  --rule: #faf6e9;
+  --card: #16161a;
+  --card-warm: #1c1c20;
+  --shadow-sm: 3px 3px 0 var(--yellow);
+  --shadow-md: 6px 6px 0 var(--yellow);
+  --shadow-lg: 10px 10px 0 var(--yellow);
+  --border-thin: 2px solid var(--ink);
+  --border: 3px solid var(--ink);
+  --border-thick: 4px solid var(--ink);
+}
+
+:root[data-theme="dim"] {
+  --paper: #e8e4d4;
+  --paper-warm: #d8d4c2;
+  --ink: #1a1a1a;
+  --ink-soft: #3a3a3a;
+  --ink-faint: #5b5b5b;
+  --card: #f0ecd9;
+  --card-warm: #ebe7d3;
+}
+
+/* Smooth theme transition (subtle) */
+html, body, .panel, .nav-bar, .sidebar, .drawer, .feature-card,
+.btn, .toast, input, textarea, select {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Theme toggle button (in nav) */
+.theme-toggle {
+  width: 36px; height: 36px;
+  background: var(--card); border: var(--border-thin);
+  font-size: 18px; line-height: 1;
+  cursor: pointer; box-shadow: 2px 2px 0 var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.theme-toggle:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--ink); }
+.theme-toggle:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+
+/* Brightness slider */
+.brightness-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; font-family: var(--font-mono);
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ink-faint); border-top: 2px dotted var(--ink); margin-top: 12px;
+}
+.brightness-row input[type="range"] {
+  flex: 1; height: 4px; -webkit-appearance: none; appearance: none;
+  background: var(--ink); border: 2px solid var(--ink); padding: 0; margin: 0;
+}
+.brightness-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; background: var(--yellow); border: 2px solid var(--ink);
+}
+.brightness-row input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px; background: var(--yellow); border: 2px solid var(--ink); border-radius: 0;
+}
+
+/* ============================================================
+   v3 — ANIMATIONS (subtle, brutalist)
+   ============================================================ */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes wobble {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 4px 4px 0 var(--pink); }
+  50% { box-shadow: 4px 4px 0 var(--yellow); }
+}
+@keyframes pulseHi {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+.anim-up { animation: slideUp 0.4s ease-out both; }
+.anim-wobble { animation: wobble 1.8s ease-in-out infinite; }
+.anim-glow { animation: glow 2.4s ease-in-out infinite; }
+.anim-pulse { animation: pulseHi 1.6s ease-in-out infinite; }
+
+/* ============================================================
+   v3 — LOGIN BIGGER INPUTS + LANDING HERO
+   ============================================================ */
+.input-xl, input.input-xl, textarea.input-xl {
+  font-size: 16px !important;
+  padding: 16px 18px !important;
+  min-height: 52px;
+}
+input.input-xl:focus, textarea.input-xl:focus {
+  box-shadow: 5px 5px 0 var(--yellow);
+}

@@ -74,6 +74,15 @@
     localStorage.removeItem(DRAFT_PREFIX + toolId)
   }
 
+  /* ─── v3 — pushed resumes (output bin from "Push to Resume" buttons) ─── */
+  const RESUMES_KEY = 'yahavi-forge-resumes'
+  function loadResumes() {
+    return jget(RESUMES_KEY, []) || []
+  }
+  function saveResumes(list) {
+    jset(RESUMES_KEY, Array.isArray(list) ? list : [])
+  }
+
   root.HKForge = root.HKForge || {}
   root.HKForge.state = {
     loadKeys,
@@ -86,5 +95,7 @@
     loadDraft,
     saveDraft,
     clearDraft,
+    loadResumes,
+    saveResumes,
   }
 })(window)

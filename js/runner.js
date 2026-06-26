@@ -152,6 +152,7 @@
             <button class="btn btn-ghost" id="btn-copy" disabled>⧉ COPY</button>
             <button class="btn btn-ghost" id="btn-pdf" disabled>↓ PDF</button>
             <button class="btn btn-ghost" id="btn-html" disabled>↓ HTML</button>
+            <button class="btn btn-pink" id="btn-push-resume" disabled>↗ PUSH TO RESUME</button>
             ${portfolioPreviewHtml}
           </div>
         </div>
@@ -220,7 +221,10 @@
           max_tokens: tool.maxTokens,
         })
         renderOutput(out, result, provider, tool)
-        ;['btn-copy', 'btn-pdf', 'btn-html'].forEach((b) => ($('#' + b, mount).disabled = false))
+        ;['btn-copy', 'btn-pdf', 'btn-html', 'btn-push-resume'].forEach((b) => {
+          const el = $('#' + b, mount)
+          if (el) el.disabled = false
+        })
         if (tool.portfolioOutput) {
           const pp = $('#btn-open-preview', mount)
           if (pp) {
@@ -281,6 +285,68 @@
       a.download = `yahavi-forge-${id}.html`
       a.click()
       setTimeout(() => URL.revokeObjectURL(a.href), 5000)
+      maybeAskForReview()
+    })
+    // v3 — Push to Resume: save the AI output as a Resume row in localStorage so
+    // the user can come back to it from the Builder.
+    const pushBtn = $('#btn-push-resume', mount)
+    if (pushBtn) {
+      pushBtn.addEventListener('click', () => {
+        const out = $('#output', mount)
+        const raw = out?.dataset?.raw || out?.innerText || ''
+        if (!raw.trim()) return
+        const list = F.state.loadResumes ? F.state.loadResumes() : []
+        const entry = {
+          id: 'r_' + Date.now().toString(36),
+          title: `${tool.title} · ${new Date().toLocaleDateString()}`,
+          source_tool: id,
+          content: raw,
+          created_at: new Date().toISOString(),
+        }
+        list.unshift(entry)
+        if (F.state.saveResumes) F.state.saveResumes(list.slice(0, 50))
+        F.UI.toast('▸ Pushed to My Resumes (saved on this device)', 'success')
+        maybeAskForReview()
+      })
+    }
+  }
+
+  /* per-export review prompt — at most one ask per session, capped per-key/30days */
+  function maybeAskForReview() {
+    try {
+      const askedAt = parseInt(localStorage.getItem('yahavi-forge-reviewed-at') || '0', 10)
+      if (askedAt && Date.now() - askedAt < 30 * 24 * 60 * 60 * 1000) return // 30-day cooldown
+      if (sessionStorage.getItem('yahavi-forge-review-asked')) return
+      sessionStorage.setItem('yahavi-forge-review-asked', '1')
+      setTimeout(showReviewModal, 900)
+    } catch {}
+  }
+  function showReviewModal() {
+    if (document.getElementById('review-modal')) return
+    const m = document.createElement('div')
+    m.id = 'review-modal'
+    m.style.cssText =
+      'position:fixed;inset:0;background:rgba(10,10,10,.7);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;'
+    m.innerHTML = `
+      <div style="background:var(--card);border:var(--border-thick);box-shadow:8px 8px 0 var(--pink);max-width:420px;padding:28px;font-family:var(--font-body);">
+        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--pink);margin-bottom:8px;">▸ ONE QUICK FAVOUR</div>
+        <h3 style="font-family:var(--font-display);font-size:22px;text-transform:uppercase;letter-spacing:-.01em;line-height:1.05;margin-bottom:10px;">Did Yahavi Forge help you?</h3>
+        <p style="font-size:14px;line-height:1.5;margin-bottom:18px;">If yes — a 30-second review on social helps a tiny team in Delhi keep this free for everyone else. ❤️</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/sharing/share-offsite/?url=https://forge.hackknow.com&summary=Yahavi%20Forge%20is%20a%20free%2017-tool%20AI%20career%20OS%20%E2%80%94%20bring%20your%20own%20free%20keys.%20Saved%20me%20hours.%20%E2%9D%A4%EF%B8%8F">▸ Share on LinkedIn</a>
+          <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="https://twitter.com/intent/tweet?text=Just%20used%20%40hackknow%20Yahavi%20Forge%20%E2%80%94%20free%20AI%20career%20OS%2C%2017%20tools%2C%20BYOK.%20https%3A%2F%2Fforge.hackknow.com">▸ Post on X</a>
+          <button class="btn btn-ghost" id="review-skip">▸ Maybe later</button>
+        </div>
+      </div>
+    `
+    document.body.appendChild(m)
+    const close = () => {
+      localStorage.setItem('yahavi-forge-reviewed-at', String(Date.now()))
+      m.remove()
+    }
+    m.querySelector('#review-skip').addEventListener('click', close)
+    m.addEventListener('click', (e) => {
+      if (e.target === m) close()
     })
   }
 
