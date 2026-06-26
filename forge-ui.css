@@ -231,3 +231,34 @@
   .footer-cols { grid-template-columns: 1fr; }
   .footer-news, .footer-cols, .footer-badges, .footer-contact, .footer-bottom { padding-left: 18px; padding-right: 18px; }
 }
+
+/* ============================================
+   v2 ADDITIONS — sidebar groups + feature buttons
+   ============================================ */
+.sidebar-group { margin-top: 14px; }
+.sidebar-group + .sidebar-group { margin-top: 16px; }
+.sidebar-group-label {
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--pink); padding: 0 8px 6px;
+  border-bottom: 2px dotted var(--ink); margin-bottom: 6px;
+}
+
+/* feature cards rendered as buttons keep button defaults out */
+button.feature-card {
+  font-family: inherit; font-size: inherit; text-align: left;
+  border-radius: 0; outline: none;
+}
+button.feature-card:focus-visible {
+  outline: 3px solid var(--yellow); outline-offset: 2px;
+}
+
+/* loading spinner inside output panels */
+.output-area.has-content .loading-dots span { background: var(--pink); }
+
+/* ATS report fallback (used by /js/runner.js when AI fails) */
+.report-empty {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-faint);
+  border: 2px dashed var(--ink); padding: 40px; text-align: center;
+}
