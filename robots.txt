@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Allow: /pricing
+Allow: /tutorial
+Allow: /terms
+Allow: /privacy
+Allow: /cookies
+Allow: /refund
+
+# Do not index the app shell, auth, or account pages
+Disallow: /app
+Disallow: /login
+Disallow: /settings
+Disallow: /demo-report.html
+
+# Block common probe paths explicitly
+Disallow: /.env
+Disallow: /.git/
+Disallow: /package.json
+Disallow: /yarn.lock
+Disallow: /pnpm-lock.yaml
+
+Sitemap: https://forge.hackknow.com/sitemap.xml

@@ -1,5 +1,98 @@
-# Cloudflare Pages auto-strips .html, so /app.html is served at /app natively.
-# Just an alias for old-style /signin → /login.
+# ============================================================
+#  Yahavi Forge — Cloudflare Pages redirects + route hardening
+#  Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+#  Rule precedence: exact paths beat splat patterns; first match wins.
+#  Status codes:
+#    301  — permanent redirect (SEO-friendly, client caches)
+#    302  — temporary (no client caching)
+#    200  — SPA rewrite (same URL shown to user, file changed internally)
+#    404  — serve 404.html with correct status (stops soft-404 / 200 HTML for probes)
+#
+#  Security rationale for the probe-path 404 block:
+#   The live site was returning 200 HTML for paths like /.env, /.git/config,
+#   /package.json, /api/health, etc. This happens because CF Pages falls back
+#   to the nearest index.html when no matching file exists and no 404.html
+#   is present. The rules below return proper 404 status codes for any path
+#   that could indicate a misconfiguration probe or accidental file exposure.
+#   We do NOT return 403 (which confirms the resource exists); 404 is correct.
+# ============================================================
+
+# ─── LEGACY / ALIAS REDIRECTS ───
 /signin    /login    301
 /help      /tutorial 301
 /guide     /tutorial 301
+
+# ─── PROBE PATH HARDENING — return real 404, stop soft-200 HTML ───
+# Dot-files and build artifacts that must never be served
+/.env                  /404.html  404
+/.env.local            /404.html  404
+/.env.development      /404.html  404
+/.env.production       /404.html  404
+/.env.staging          /404.html  404
+/.env.*                /404.html  404
+/.git                  /404.html  404
+/.git/*                /404.html  404
+/.gitignore            /404.html  404
+/.gitattributes        /404.html  404
+/.DS_Store             /404.html  404
+/.htaccess             /404.html  404
+/.htpasswd             /404.html  404
+/.npmrc                /404.html  404
+/.yarnrc               /404.html  404
+/.nvmrc                /404.html  404
+
+# Build/dependency manifests
+/package.json          /404.html  404
+/package-lock.json     /404.html  404
+/yarn.lock             /404.html  404
+/pnpm-lock.yaml        /404.html  404
+/bun.lockb             /404.html  404
+/tsconfig.json         /404.html  404
+/tsconfig.*.json       /404.html  404
+/vite.config.*         /404.html  404
+/webpack.config.*      /404.html  404
+/rollup.config.*       /404.html  404
+/next.config.*         /404.html  404
+/nuxt.config.*         /404.html  404
+/wrangler.toml         /404.html  404
+/wrangler.json         /404.html  404
+
+# API / schema discovery endpoints (no API lives in CF Pages; Workers handle /api/*)
+/openapi.json          /404.html  404
+/swagger.json          /404.html  404
+/swagger.yaml          /404.html  404
+/api-docs              /404.html  404
+/api-docs/*            /404.html  404
+
+# Composer / PHP / Ruby / Rails artifacts
+/composer.json         /404.html  404
+/Gemfile               /404.html  404
+/Gemfile.lock          /404.html  404
+/Makefile              /404.html  404
+
+# CI / secret / cloud configs
+/.travis.yml           /404.html  404
+/.circleci/*           /404.html  404
+/.github               /404.html  404
+/.github/*             /404.html  404
+/Dockerfile            /404.html  404
+/docker-compose.yml    /404.html  404
+/docker-compose.yaml   /404.html  404
+/.dockerignore         /404.html  404
+
+# Admin panels and dev tools that should never be in prod
+/wp-admin              /404.html  404
+/wp-login.php          /404.html  404
+/wp-content/*          /404.html  404
+/wp-includes/*         /404.html  404
+/admin                 /404.html  404
+/phpmyadmin            /404.html  404
+/phpinfo.php           /404.html  404
+/info.php              /404.html  404
+/test.php              /404.html  404
+/.well-known/apple-app-site-association /404.html  404
+
+# ─── EXPLICITLY ALLOWED .well-known paths ───
+# security.txt exists in /public/.well-known/security.txt; CF serves it natively.
+# Do NOT add /.well-known/* → 404 above — security.txt needs to be reachable.
