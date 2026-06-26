@@ -373,15 +373,16 @@ button.feature-card:focus-visible {
 }
 .yahavi-chat.open { transform: scale(1) translateY(0); opacity: 1; pointer-events: auto; }
 
-/* Mobile: bottom sheet — full width, 480px, radius on top only */
+/* Mobile: floating corner panel with side margins (not full-width bottom sheet) */
 @media (max-width: 480px) {
   #ask-yahavi-btn.ask-yahavi-btn { padding: 0 14px; }
   .yahavi-chat {
-    width: 100%;
-    height: min(420px, calc(100vh - 60px));
-    bottom: 0; right: 0;
-    border-radius: 20px 20px 0 0;
-    transform-origin: bottom center;
+    width: calc(100vw - 24px);
+    height: min(480px, calc(100vh - 80px));
+    bottom: 16px;
+    right: 12px;
+    border-radius: 20px;
+    transform-origin: bottom right;
   }
 }
 
@@ -464,18 +465,26 @@ button.feature-card:focus-visible {
 }
 /* AI = yellow with dark text */
 .yc-msg-ai .yc-bubble {
-  background: linear-gradient(135deg, #FFD400 0%, #E6C000 100%);
-  color: #111111;
+  background: var(--yellow, #FFD400);
+  color: var(--yc-ai-text, #111111);
   border-bottom-left-radius: 5px;
-  box-shadow: 0 4px 14px rgba(255,212,0,0.3);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
 }
-/* User = pink with white text */
+/* User = pink/accent with appropriate text */
 .yc-msg-user .yc-bubble {
-  background: linear-gradient(135deg, #FF2E63 0%, #CC1A48 100%);
-  color: #ffffff;
+  background: var(--pink, #FF2E63);
+  color: var(--yc-user-text, #ffffff);
   border-bottom-right-radius: 5px;
-  box-shadow: 0 4px 14px rgba(255,46,99,0.35);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
 }
+/* Per-theme text color overrides for AI bubble */
+:root[data-theme="matrix"] .yc-msg-ai .yc-bubble { color: #0B0F0C; }
+:root[data-theme="amber"] .yc-msg-ai .yc-bubble { color: #111111; }
+:root[data-theme="crimson"] .yc-msg-ai .yc-bubble { color: #ffffff; }
+:root[data-theme="tokyo"] .yc-msg-ai .yc-bubble { color: #ffffff; }
+:root[data-theme="dracula"] .yc-msg-ai .yc-bubble { color: #ffffff; }
+:root[data-theme="github-dark"] .yc-msg-ai .yc-bubble { color: #ffffff; }
+:root[data-theme="neo-mint"] .yc-msg-user .yc-bubble { color: #ffffff; }
 .yc-bubble h3, .yc-bubble h4 {
   font-weight: 800; font-size: 13px; text-transform: uppercase;
   letter-spacing: 0.04em; margin: 6px 0 4px;

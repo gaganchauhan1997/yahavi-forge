@@ -286,7 +286,8 @@ STEP 3 — RUN & EXPORT
       if (_waitingForName === false && history.length <= 1) _waitingForName = true
     } finally {
       sendBtn.disabled = false
-      input.focus({ preventScroll: true })
+      // Do NOT call input.focus() here — it opens the mobile keyboard automatically
+      // after every AI response which is very annoying. User taps input when ready.
     }
   }
 

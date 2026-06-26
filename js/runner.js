@@ -167,6 +167,7 @@
         </div>
       </div>
 
+      <div class="sp-wrap" id="style-preset-picker"></div>
       <div id="tool-reviews-section" style="margin-top:24px;"></div>
     `
 
@@ -229,6 +230,12 @@
           const el = $('#' + b, mount)
           if (el) el.disabled = false
         })
+        // Wire style presets after first output
+        const spPicker = $('#style-preset-picker', mount)
+        if (spPicker && root.HKForge?.StylePresets) {
+          out.dataset.toolId = id
+          root.HKForge.StylePresets.renderPicker(spPicker, out)
+        }
         if (tool.portfolioOutput) {
           const pp = $('#btn-open-preview', mount)
           if (pp) {
