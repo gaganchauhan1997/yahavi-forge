@@ -305,113 +305,259 @@ button.feature-card:focus-visible {
 .sidebar-keys.has-keys .key-dot { background: var(--lime); }
 
 /* ============================================================
-   v3 — YAHAVI CHAT PANEL
+   v4 — YAHAVI CHAT (soft, rounded, friendly)
    ============================================================ */
-.yahavi-chat {
-  position: fixed; bottom: 24px; right: 24px; z-index: 290;
-  width: min(380px, calc(100vw - 32px));
-  height: 540px; max-height: calc(100vh - 100px);
-  background: var(--card); color: var(--ink);
-  border: var(--border-thick); box-shadow: 12px 12px 0 var(--ink);
-  display: none; flex-direction: column;
-  font-family: var(--font-body);
-  animation: slideUp 0.25s ease-out;
+#ask-yahavi-btn.ask-yahavi-btn {
+  /* Pill shape, smaller, soft shadow */
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  padding: 11px 18px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  box-shadow: 0 6px 20px rgba(255, 46, 99, 0.35), 2px 2px 0 var(--ink);
+  background: linear-gradient(135deg, #ff2e63 0%, #ff6b1a 100%);
+  color: #fff;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
+  bottom: 20px; right: 20px;
 }
-.yahavi-chat.open { display: flex; }
+#ask-yahavi-btn.ask-yahavi-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 28px rgba(255, 46, 99, 0.45), 3px 3px 0 var(--ink);
+}
+#ask-yahavi-btn.ask-yahavi-btn span:first-child { font-size: 16px; }
+#ask-yahavi-btn.hide { opacity: 0; transform: scale(0.6); pointer-events: none; }
+@media (max-width: 600px) {
+  #ask-yahavi-btn.ask-yahavi-btn { padding: 12px 14px; }
+}
 
-.yahavi-head {
+/* Chat panel — pill-rounded, lighter, with smooth open */
+.yahavi-chat {
+  position: fixed; bottom: 20px; right: 20px; z-index: 290;
+  width: min(360px, calc(100vw - 24px));
+  height: min(560px, calc(100vh - 80px));
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(10, 10, 10, 0.28), 4px 4px 0 var(--ink);
+  display: flex; flex-direction: column;
+  font-family: var(--font-body);
+  transform: scale(0.85) translateY(20px);
+  opacity: 0;
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition: transform 0.32s cubic-bezier(.34,1.56,.64,1), opacity 0.2s ease-out;
+}
+.yahavi-chat.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.yc-head {
   display: flex; align-items: center; justify-content: space-between;
   padding: 14px 16px;
-  background: var(--ink); color: var(--paper);
-  border-bottom: var(--border);
+  background: linear-gradient(135deg, var(--ink) 0%, #2a2a2a 100%);
+  color: var(--paper);
+  border-bottom: 2px solid var(--ink);
 }
-.yahavi-title { display: flex; align-items: center; gap: 12px; }
-.yahavi-avatar {
-  font-size: 22px; width: 36px; height: 36px;
-  background: var(--yellow); border: var(--border-thin);
+.yc-id { display: flex; align-items: center; gap: 11px; }
+.yc-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
+  color: var(--ink); border: 2px solid var(--ink);
+  font-family: var(--font-display); font-size: 18px;
   display: flex; align-items: center; justify-content: center;
 }
-.yahavi-name { font-family: var(--font-display); font-size: 14px; letter-spacing: -0.01em; text-transform: uppercase; }
-.yahavi-status {
-  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em;
-  color: var(--yellow); display: flex; align-items: center; gap: 6px;
+.yc-name { font-family: var(--font-display); font-size: 15px; letter-spacing: -0.01em; }
+.yc-status {
+  font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.1em;
+  color: var(--lime); display: flex; align-items: center; gap: 5px;
 }
-.yahavi-status .blink {
-  width: 6px; height: 6px; background: var(--lime);
-  animation: blink 1.2s ease-in-out infinite;
+.yc-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); animation: yc-pulse 1.4s ease-in-out infinite; }
+@keyframes yc-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.55; transform: scale(0.9); } }
+.yc-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); color: var(--paper);
+  border: none; cursor: pointer;
+  font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
 }
-.yahavi-close {
-  width: 32px; height: 32px; background: var(--pink); color: var(--paper);
-  border: var(--border-thin); cursor: pointer; font-weight: 900;
-}
+.yc-close:hover { background: rgba(255,255,255,0.22); }
 
-.yahavi-msgs {
-  flex: 1; overflow-y: auto; padding: 14px;
+.yc-msgs {
+  flex: 1; overflow-y: auto; padding: 14px 14px 10px;
   background: var(--paper-warm);
-  display: flex; flex-direction: column; gap: 12px;
+  display: flex; flex-direction: column; gap: 10px;
 }
-.yahavi-msg { display: flex; }
-.yahavi-msg-user { justify-content: flex-end; }
-.yahavi-bubble {
-  max-width: 86%;
+.yc-msg { display: flex; animation: yc-in 0.32s cubic-bezier(.34,1.56,.64,1); }
+@keyframes yc-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.yc-msg-user { justify-content: flex-end; }
+.yc-bubble {
+  max-width: 85%;
   padding: 10px 14px;
-  font-size: 13.5px; line-height: 1.5;
-  background: var(--card); border: 2px solid var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
+  font-size: 14px; line-height: 1.45;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(10,10,10,0.08);
 }
-.yahavi-msg-user .yahavi-bubble {
-  background: var(--yellow); color: var(--ink);
+.yc-msg-user .yc-bubble {
+  background: linear-gradient(135deg, var(--yellow) 0%, #ffd000 100%);
+  color: var(--ink);
+  border-bottom-right-radius: 4px;
 }
-.yahavi-msg-ai .yahavi-bubble {
+.yc-msg-ai .yc-bubble {
   background: var(--card); color: var(--ink);
+  border: 1px solid rgba(10,10,10,0.08);
+  border-bottom-left-radius: 4px;
 }
-.yahavi-bubble h1, .yahavi-bubble h2, .yahavi-bubble h3 {
-  font-family: var(--font-display); font-size: 14px;
-  text-transform: uppercase; letter-spacing: -0.01em;
+.yc-bubble h3, .yc-bubble h4 {
+  font-family: var(--font-display); font-size: 13px; text-transform: uppercase; letter-spacing: -0.01em;
   margin: 6px 0 4px;
 }
-.yahavi-bubble ul, .yahavi-bubble ol { padding-left: 18px; margin: 4px 0; }
-.yahavi-bubble code { font-family: var(--font-mono); font-size: 11.5px; background: var(--ink); color: var(--paper); padding: 0 4px; }
-.yahavi-bubble strong { background: var(--yellow); padding: 0 3px; }
-.yahavi-attrib { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--ink-faint); margin-top: 6px; text-transform: uppercase; }
-
-.yahavi-input-row {
-  display: flex; gap: 8px; padding: 12px 14px;
-  background: var(--card); border-top: var(--border);
+.yc-bubble ul { padding-left: 18px; margin: 4px 0; }
+.yc-bubble ul li { margin-bottom: 3px; }
+.yc-bubble code {
+  font-family: var(--font-mono); font-size: 11.5px;
+  background: rgba(10,10,10,0.08); color: var(--ink);
+  padding: 0 5px; border-radius: 4px;
 }
-.yahavi-input {
-  flex: 1; padding: 10px 12px;
-  background: var(--paper) !important;
-  border: var(--border) !important;
-  font-family: var(--font-body); font-size: 13px;
+.yc-bubble strong { background: rgba(255, 234, 0, 0.4); padding: 0 3px; border-radius: 3px; }
+.yc-bubble a { color: var(--pink); border-bottom: 1px solid currentColor; font-weight: 600; }
+.yc-attrib { font-size: 9.5px; color: var(--ink-faint); margin-top: 6px; font-family: var(--font-mono); letter-spacing: 0.05em; }
+
+.yc-form { display: flex; gap: 8px; padding: 10px 12px; background: var(--card); border-top: 1px solid rgba(10,10,10,0.08); }
+.yc-input {
+  flex: 1; padding: 11px 14px;
+  background: var(--paper-warm) !important;
+  border: 1px solid rgba(10,10,10,0.12) !important;
+  border-radius: 999px;
+  font-family: var(--font-body); font-size: 14px;
   color: var(--ink) !important; outline: none;
+  transition: background 0.15s, border 0.15s, transform 0.15s;
 }
-.yahavi-input:focus { background: var(--yellow) !important; box-shadow: 2px 2px 0 var(--ink); transform: translate(-1px,-1px); }
-.yahavi-send {
-  width: 44px; height: 44px;
-  background: var(--pink); color: var(--paper);
-  border: var(--border); cursor: pointer;
-  font-family: var(--font-display); font-size: 16px;
-  box-shadow: 2px 2px 0 var(--ink);
+.yc-input:focus {
+  background: #fff !important;
+  border-color: var(--pink) !important;
+  transform: scale(1.01);
+  box-shadow: 0 0 0 4px rgba(255, 46, 99, 0.12);
 }
-.yahavi-send:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 var(--ink); }
-.yahavi-send:disabled { opacity: 0.5; cursor: not-allowed; }
+.yc-send {
+  width: 42px; height: 42px; flex: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--orange) 100%);
+  color: var(--paper); border: 2px solid var(--ink);
+  font-size: 18px; font-weight: 800; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 46, 99, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.yc-send:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(255, 46, 99, 0.45); }
+.yc-send:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-.yahavi-thinking { display: inline-flex; gap: 4px; }
-.yahavi-thinking span {
-  width: 7px; height: 7px; background: var(--ink);
-  animation: pulseHi 1s ease-in-out infinite;
+.yc-typing { display: inline-flex; gap: 4px; }
+.yc-typing span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--ink); opacity: 0.4;
+  animation: yc-typing 1.2s ease-in-out infinite;
 }
-.yahavi-thinking span:nth-child(2) { animation-delay: 0.15s; }
-.yahavi-thinking span:nth-child(3) { animation-delay: 0.3s; }
+.yc-typing span:nth-child(2) { animation-delay: 0.15s; }
+.yc-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes yc-typing { 0%, 100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(-4px); opacity: 1; } }
 
-.yahavi-fine {
-  padding: 8px 14px; font-family: var(--font-mono);
-  font-size: 9.5px; letter-spacing: 0.04em;
-  color: var(--ink-faint); background: var(--card);
-  border-top: 1px dotted var(--ink);
+/* ============================================================
+   v4 — SIDEBAR COLLAPSIBLE CATEGORIES + scroll-reveal
+   ============================================================ */
+.sidebar-cat {
+  margin-bottom: 4px;
+}
+.sidebar-cat-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 11px 12px;
+  background: transparent; color: var(--ink);
+  border: 2px solid transparent;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; text-align: left;
+  transition: all 0.15s;
+  border-bottom: 2px dotted var(--ink);
+}
+.sidebar-cat-toggle:hover {
+  background: var(--yellow);
+  border-color: var(--ink);
+}
+.sidebar-cat-toggle .cat-icon {
+  display: inline-block;
+  transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+  font-size: 10px;
+  opacity: 0.65;
+}
+.sidebar-cat.open .sidebar-cat-toggle .cat-icon {
+  transform: rotate(90deg);
+  opacity: 1;
+}
+.sidebar-cat-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.42s cubic-bezier(.4,0,.2,1);
+}
+.sidebar-cat.open .sidebar-cat-list {
+  max-height: 600px;
+}
+.sidebar-cat-list .nav-tab {
+  padding-left: 22px !important;
+  border-left: 2px dotted transparent;
+  margin: 4px 0 4px 4px;
+  transition: all 0.2s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  transform: translateX(-8px);
+}
+.sidebar-cat.open .sidebar-cat-list .nav-tab {
+  opacity: 1;
+  transform: translateX(0);
+}
+.sidebar-cat.open .sidebar-cat-list .nav-tab:nth-child(1) { transition-delay: 0.05s; }
+.sidebar-cat.open .sidebar-cat-list .nav-tab:nth-child(2) { transition-delay: 0.09s; }
+.sidebar-cat.open .sidebar-cat-list .nav-tab:nth-child(3) { transition-delay: 0.13s; }
+.sidebar-cat.open .sidebar-cat-list .nav-tab:nth-child(4) { transition-delay: 0.17s; }
+.sidebar-cat.open .sidebar-cat-list .nav-tab:nth-child(5) { transition-delay: 0.21s; }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal.stagger-1.in-view { transition-delay: 0.08s; }
+.reveal.stagger-2.in-view { transition-delay: 0.16s; }
+.reveal.stagger-3.in-view { transition-delay: 0.24s; }
+.reveal.stagger-4.in-view { transition-delay: 0.32s; }
+.reveal.scale {
+  transform: translateY(28px) scale(0.96);
+}
+.reveal.scale.in-view {
+  transform: translateY(0) scale(1);
+}
+.reveal.slide-left {
+  transform: translateX(-40px);
+}
+.reveal.slide-left.in-view {
+  transform: translateX(0);
+}
+.reveal.slide-right {
+  transform: translateX(40px);
+}
+.reveal.slide-right.in-view {
+  transform: translateX(0);
 }
 
-/* On dark theme: chat panel keeps brutalist contrast */
-:root[data-theme="dark"] .yahavi-bubble { background: var(--card-warm); color: var(--ink); }
-:root[data-theme="dark"] .yahavi-msg-user .yahavi-bubble { background: var(--yellow); color: #0a0a0a; }
+/* Parallax-y subtle on hero */
+@media (prefers-reduced-motion: no-preference) {
+  .land-title {
+    transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  }
+}

@@ -40,9 +40,13 @@
           )} ${escText(t.title.toUpperCase())}</button>`
         })
         .join('')
-      return `<div class="sidebar-group">
-        <div class="sidebar-group-label">▸ ${escText(g.label)}</div>
-        ${items}
+      // v4: collapsible category — click header to expand/collapse with smooth transition
+      return `<div class="sidebar-cat" data-cat="${escAttr(g.id)}">
+        <button class="sidebar-cat-toggle" type="button" data-cat-toggle="${escAttr(g.id)}">
+          <span>▸ ${escText(g.label)} <small style="opacity:.6;font-weight:400;">${g.items.length}</small></span>
+          <span class="cat-icon">›</span>
+        </button>
+        <div class="sidebar-cat-list">${items}</div>
       </div>`
     }).join('')
 
@@ -81,10 +85,26 @@
     nav.querySelectorAll('.nav-tab[data-tool]').forEach((b) =>
       b.addEventListener('click', () => go(b.dataset.tool))
     )
+    // v4: wire collapsible category toggles
+    nav.querySelectorAll('[data-cat-toggle]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const cat = btn.closest('.sidebar-cat')
+        if (cat) cat.classList.toggle('open')
+      })
+    )
     const kBtn = $('#sidebar-keys-btn', nav)
     if (kBtn) kBtn.addEventListener('click', openDrawer)
     updateSidebarKeysState()
     if (window.HKForge && window.HKForge.theme && window.HKForge.theme.init) window.HKForge.theme.init()
+  }
+
+  /** Auto-expand the sidebar category that contains a given tool id. */
+  function openCategoryFor(toolId) {
+    if (!toolId || toolId === 'home') return
+    const group = (F.SIDEBAR || []).find((g) => (g.items || []).includes(toolId))
+    if (!group) return
+    const cat = document.querySelector(`.sidebar-cat[data-cat="${group.id}"]`)
+    if (cat && !cat.classList.contains('open')) cat.classList.add('open')
   }
 
   function updateSidebarKeysState() {
@@ -102,6 +122,7 @@
     F.state.patchPrefs({ lastTool: id })
     if (location.hash !== '#/' + id) location.hash = '#/' + id
     setActive(id)
+    openCategoryFor(id)
     const mount = $('#tool-mount')
     if (!mount) return
     if (id === 'home') F.runner.renderHome(mount)
