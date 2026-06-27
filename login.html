@@ -253,10 +253,12 @@
     });
   }
 
-  // ─── Auth service guard ───
-  if (!window.HKAuth || !window.supabase) {
-    msg('Sign-in service is loading… If this persists, <a href="/app">continue as a guest</a> (all 19 tools work without an account).', 'err');
-  }
+  // ─── Auth service guard (delayed — scripts may still be initialising) ───
+  setTimeout(function() {
+    if (!window.HKAuth || !window.supabase) {
+      msg('⚠ Sign-in service unavailable. This usually means the auth backend is paused. <br>You can still <a href="/app">use all tools as guest →</a>', 'info');
+    }
+  }, 600);
 
   function consumeNext() {
     var p = new URLSearchParams(location.search);
