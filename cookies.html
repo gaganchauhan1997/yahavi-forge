@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cookie Policy — Yahavi Forge · by Hackknow</title>
+<meta name="description" content="Cookie & local storage policy for Yahavi Forge by Hackknow. Minimal by design." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="legal.css" />
+<link rel="stylesheet" href="forge-ui.css" />
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a class="brand" href="/" style="border:none;">
+    <div class="brand-mark">Y</div>
+    <span>YAHAVI</span>
+    <span class="brand-sub">FORGE</span>
+  </a>
+  <div class="nav-status">
+    <a class="btn-settings" href="/privacy" style="background:var(--ink);">▸ PRIVACY</a>
+    <a class="btn-settings" href="/">▸ BACK TO FORGE</a>
+  </div>
+</nav>
+
+<main class="legal-main">
+  <header class="legal-head">
+    <div class="legal-eyebrow">▸ COOKIES · MINIMAL BY DESIGN</div>
+    <h1 class="legal-title">Cookie<br>Policy</h1>
+    <div class="legal-meta">
+      <span>Service: <strong>Yahavi Forge</strong></span>
+      <span>Effective: <strong>26 June 2026</strong></span>
+      <span>Version: <strong>2.0</strong></span>
+    </div>
+  </header>
+
+  <div class="legal-intro">
+    Forge uses <strong>almost no cookies</strong>. We don't run advertising or cross-site tracking. The little we
+    store lives in your browser to make the app work. This page explains exactly what and why, including all
+    localStorage keys set by the app. It supplements our <a href="/privacy">Privacy Policy</a>.
+  </div>
+
+  <section class="legal-section" id="what">
+    <h2><span class="num">01</span>What we store on your device</h2>
+    <p>All storage is <code>localStorage</code> or <code>sessionStorage</code> — not HTTP cookies (except Supabase auth,
+    which may use both). Nothing is shared with advertisers.</p>
+
+    <table class="legal-table">
+      <thead><tr><th>Key</th><th>Type</th><th>Purpose</th><th>Lifetime</th></tr></thead>
+      <tbody>
+        <tr><td>yahavi-forge-keys</td><td>localStorage</td><td>Your AI provider API keys — never sent to Hackknow servers</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-prefs</td><td>localStorage</td><td>Tool preferences (tone, last-used tool, etc.)</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-drafts</td><td>localStorage</td><td>Auto-saved in-progress tool inputs (draft text)</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-theme</td><td>localStorage</td><td>Your chosen colour theme (e.g. Cyber Yellow, Matrix)</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-brightness</td><td>localStorage</td><td>Your display brightness preference</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-cookie-consent</td><td>localStorage</td><td>Your cookie consent choice (Accept All / Essential Only)</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-resumes</td><td>localStorage</td><td>Tool outputs you pushed to "Resume Output" history</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-uploads</td><td>localStorage</td><td>Resume files (TXT/PDF/image) you uploaded to Settings, stored as base64</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-chat-seconds</td><td>localStorage</td><td>Cumulative time your Yahavi chat panel has been open — used to qualify loyalty discounts</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-review-state</td><td>localStorage</td><td>Your star rating and comment if you submitted a review</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-coupons</td><td>localStorage</td><td>Discount coupon codes issued to this device (e.g. loyalty 50%-off coupon)</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-session</td><td>localStorage</td><td>Paid access unlock record (plan, expiry time) — verified client-side after payment</td><td>Expires with plan period</td></tr>
+        <tr><td>yahavi-forge-last-payment</td><td>localStorage</td><td>Razorpay payment ID and plan from your last purchase — for reconciliation only; no card data</td><td>Until you clear it</td></tr>
+        <tr><td>yahavi-forge-auth-cache</td><td>localStorage</td><td>Lightweight signed-in session marker for passkey sign-in (no password or secret stored)</td><td>Until sign-out / clear</td></tr>
+        <tr><td>hk-ecosystem-auth</td><td>localStorage</td><td>Supabase sign-in session token (only if you sign in via email / Google / GitHub)</td><td>Until logout / session expiry</td></tr>
+        <tr><td>hk-next</td><td>sessionStorage</td><td>Temporary post-login redirect target — used once then cleared</td><td>Tab close / use</td></tr>
+      </tbody>
+    </table>
+    <div class="legal-callout lime">
+      <span class="tag">▸ In short</span>
+      All storage is strictly necessary or functional. We set no analytics or advertising cookies. Your AI keys, resume text, and payment details (beyond the payment ID reference) are never stored on Hackknow servers.
+    </div>
+  </section>
+
+  <section class="legal-section" id="third">
+    <h2><span class="num">02</span>Third-party storage</h2>
+    <p><strong>Supabase</strong> — if you sign in, sets essential authentication storage to keep you logged in across visits.</p>
+    <p><strong>Razorpay</strong> — if you purchase a paid plan, Razorpay's checkout script (<code>checkout.razorpay.com/v1/checkout.js</code>) is loaded and may set its own storage for fraud-prevention and UX (e.g. remembering your UPI ID). This is governed by <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener noreferrer">Razorpay's Privacy Policy</a>. Razorpay does not store your full card number on our site — only in their PCI-DSS-compliant systems.</p>
+    <p><strong>Google Fonts &amp; CDN</strong> — loading fonts from Google Fonts and scripts from jsDelivr CDN sends standard request data (IP, user-agent) to those providers as part of delivering the files.</p>
+  </section>
+
+  <section class="legal-section" id="manage">
+    <h2><span class="num">03</span>Managing &amp; clearing</h2>
+    <p>You can clear all Forge storage at any time:</p>
+    <ul>
+      <li><strong>In-app Keys panel</strong> — removes your API keys</li>
+      <li><strong>Settings → Clear All</strong> — removes keys, drafts, history, uploads, prefs, session, and review data from this device</li>
+      <li><strong>Browser site data</strong> — clear via your browser's Developer Tools or Privacy settings</li>
+    </ul>
+    <p>Clearing storage signs you out and removes your saved keys and preferences from this device. Blocking storage entirely may prevent the app from remembering your keys between visits.</p>
+  </section>
+
+  <section class="legal-section" id="contact">
+    <h2><span class="num">04</span>Contact</h2>
+    <p>Questions? <a href="mailto:team@hackknow.com">team@hackknow.com</a>. <a href="#what">▸ Back to top</a></p>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="forge-ui.js"></script>
+</body>
+</html>
