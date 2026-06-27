@@ -33,12 +33,22 @@
     <span>YAHAVI</span>
     <span class="brand-sub">FORGE</span>
   </a>
-  <div class="nav-status">
+  <div class="nav-status" id="nav-desktop-links">
     <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme">☀</button>
     <a class="btn-settings" href="/login" style="background:var(--ink);">▸ SIGN IN</a>
     <a class="btn-settings" href="/login?mode=signup" style="background:var(--pink);color:var(--paper);">▸ SIGN UP — FREE</a>
   </div>
+  <!-- Mobile hamburger -->
+  <button class="nav-hamburger" id="nav-hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<!-- Mobile menu drawer -->
+<div class="nav-mobile-drawer" id="nav-mobile-drawer" hidden>
+  <a class="btn-settings" href="/login" style="width:100%;justify-content:center;background:var(--ink);">▸ SIGN IN</a>
+  <a class="btn-settings" href="/login?mode=signup" style="width:100%;justify-content:center;background:var(--pink);color:var(--paper);">▸ SIGN UP — FREE</a>
+  <a class="btn-settings" href="/app" style="width:100%;justify-content:center;background:transparent;border-color:var(--ink);">▸ OPEN APP (GUEST)</a>
+</div>
 
 <!-- =========== HERO =========== -->
 <section class="land-hero">
@@ -274,16 +284,78 @@
   </div>
   <div class="testi-grid">
     <div class="testi-card panel reveal stagger-1">
+      <div class="testi-stars">★★★★★</div>
       <p>"Got <strong>3 interview calls in 4 days</strong> after running Truth-Lock Tailor against a Stripe JD. The 'NEEDS EVIDENCE' tags forced honesty — and somehow that made the resume stronger."</p>
       <div class="testi-name">▸ A.K. · Bengaluru · Senior FE Eng</div>
     </div>
     <div class="testi-card panel-yellow reveal stagger-2">
+      <div class="testi-stars">★★★★★</div>
       <p>"Used the Roast tool on a Friday night. Cried. Fixed. <strong>Cleared FAANG screen on Monday.</strong> ₹49 day pass paid for itself a hundred times over."</p>
-      <div class="testi-name">▸ R.P. · Hyderabad · ML</div>
+      <div class="testi-name">▸ R.P. · Hyderabad · ML Engineer</div>
     </div>
     <div class="testi-card panel reveal stagger-3">
+      <div class="testi-stars">★★★★★</div>
       <p>"Application Pack saved me 4 hours per role. Resume + cover + recruiter DM + follow-ups, all tailored. Applied to <strong>27 roles in one weekend</strong>."</p>
-      <div class="testi-name">▸ S.M. · Mumbai · PM</div>
+      <div class="testi-name">▸ S.M. · Mumbai · Product Manager</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== FAQ =========== -->
+<section class="land-section">
+  <div class="section-head reveal">
+    <div class="section-title"><span class="num">06</span>Got questions?</div>
+    <div class="section-meta">FAQ</div>
+  </div>
+  <div class="faq-list" id="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        What is BYOK (Bring Your Own Key)?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">BYOK means you use your own free API keys from AI providers like Groq, Google Gemini, or OpenRouter. Your keys stay in your browser — we never see them. This keeps costs low and gives you full control.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        Is it really free?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">Yes. The BUILD category (5 tools) + ATS Scorer are free forever with a small watermark on exports. Paid plans (₹49/day, ₹249/month, ₹2,499/year) unlock all 17 tools and remove watermarks.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        How do I get a free API key?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">Go to <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer">console.groq.com/keys</a> and sign up with email — no credit card needed. Takes 60 seconds. Groq gives you 6,000 requests/minute free. You can also add Google Gemini and OpenRouter (both free).</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        Is my data safe?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">Your resume text and API keys never touch our servers — they go directly from your browser to the AI provider. We only hold minimal account data if you sign in (email, name), stored in Supabase with row-level security.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        What happens if my API key rate-limits?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">Forge automatically falls back to the next available provider: Groq → Gemini → OpenRouter → Together → Mistral → Cohere. Add multiple keys to get seamless, uninterrupted access.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        Do you offer student discounts?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">Yes — 80% off any paid plan. Email <a href="mailto:team@hackknow.com?subject=Student Discount Claim">team@hackknow.com</a> with subject "Student Discount Claim" and attach your graduation certificate or 12th marksheet.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" type="button" aria-expanded="false">
+        Can I use this on mobile?
+        <span class="faq-chevron">›</span>
+      </button>
+      <div class="faq-a">Yes. Yahavi Forge is fully responsive and works on all mobile browsers. Install it as a PWA from your browser menu for an app-like experience with offline support.</div>
     </div>
   </div>
 </section>
@@ -306,8 +378,68 @@
   </div>
 </section>
 
-<!-- =========== FOOTER (injected by forge-ui.js) =========== -->
-<div id="site-footer"></div>
+<!-- =========== FOOTER =========== -->
+<footer class="land-footer">
+  <div class="land-footer-inner">
+    <div class="land-footer-brand">
+      <div class="brand-mark" style="margin-bottom:12px;">Y</div>
+      <div style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:6px;">YAHAVI FORGE</div>
+      <p style="font-size:12px;opacity:.55;line-height:1.6;max-width:220px;margin-bottom:12px;">Free AI career OS. 17 tools. BYOK. Made in India, built for the world.</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <span class="land-footer-badge">🔒 Keys Never Leave Browser</span>
+        <span class="land-footer-badge">⚡ Fast AI</span>
+        <span class="land-footer-badge">🇮🇳 Made in India</span>
+      </div>
+    </div>
+    <div class="land-footer-col">
+      <div class="land-footer-col-h">Product</div>
+      <ul>
+        <li><a href="/app#/builder">Resume Builder</a></li>
+        <li><a href="/app#/ats">ATS Scorer</a></li>
+        <li><a href="/app#/cover-letter">Cover Letter</a></li>
+        <li><a href="/app#/prep">Interview Prep</a></li>
+        <li><a href="/app">All 17 Tools</a></li>
+      </ul>
+    </div>
+    <div class="land-footer-col">
+      <div class="land-footer-col-h">Resources</div>
+      <ul>
+        <li><a href="/tutorial">Tutorial</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+        <li><a href="/settings">Settings</a></li>
+        <li><a href="mailto:team@hackknow.com">Contact</a></li>
+      </ul>
+    </div>
+    <div class="land-footer-col">
+      <div class="land-footer-col-h">Company</div>
+      <ul>
+        <li><a href="https://hackknow.com" target="_blank" rel="noopener noreferrer">About Hackknow</a></li>
+        <li><a href="https://hackknow.com" target="_blank" rel="noopener noreferrer">Careers</a></li>
+        <li><a href="mailto:team@hackknow.com">team@hackknow.com</a></li>
+      </ul>
+    </div>
+    <div class="land-footer-col">
+      <div class="land-footer-col-h">Legal</div>
+      <ul>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/cookies">Cookies</a></li>
+        <li><a href="/refund">Refund</a></li>
+        <li><a href="/dpa">DPA</a></li>
+        <li><a href="/dmca">DMCA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="land-footer-bottom">
+    <span>© 2026 Hackknow Technologies. All rights reserved.</span>
+    <div style="display:flex;gap:16px;">
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/cookies">Cookies</a>
+    </div>
+  </div>
+</footer>
+<div id="site-footer" style="display:none;"></div>
 
 <!-- =========== ASK YAHAVI floating button =========== -->
 <button id="ask-yahavi-btn" class="ask-yahavi-btn" aria-label="Ask Yahavi AI">
@@ -330,5 +462,27 @@
 <script src="js/scroll-anim.js"></script>
 <script src="js/chatbot.js"></script>
 <script src="js/cookie-consent.js"></script>
+<script>
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.parentElement;
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  });
+});
+/* Mobile hamburger */
+var hamburger = document.getElementById('nav-hamburger');
+var drawer = document.getElementById('nav-mobile-drawer');
+if (hamburger && drawer) {
+  hamburger.addEventListener('click', function() {
+    var open = !drawer.hidden;
+    drawer.hidden = open;
+    hamburger.setAttribute('aria-expanded', !open);
+    hamburger.classList.toggle('open', !open);
+  });
+}
+</script>
 </body>
 </html>
