@@ -896,9 +896,10 @@
 @media (max-width: 1024px) { .land-footer-inner { grid-template-columns: 1fr 1fr 1fr; } .land-footer-brand { grid-column: 1/-1; } }
 @media (max-width: 640px) { .land-footer-inner { grid-template-columns: 1fr 1fr; padding: 32px 16px; } .land-footer-bottom { padding: 14px 16px; flex-direction: column; align-items: flex-start; } }
 
+
 /* ================================================================
-   17 TOOLS PORTFOLIO GRID — ECD Swiss Style + Red Hover Animation
-   Copied exactly from kimi.pro Portfolio.tsx
+   17 TOOLS PORTFOLIO GRID — ECD / Kimi Style
+   3-col desktop (puzzle: tall + wide), 2-col mobile
 ================================================================ */
 
 .tools-portfolio-section {
@@ -934,27 +935,27 @@
   color: var(--ink);
   border: none;
   margin: 0;
+  background: none;
 }
 .tp-count {
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--ink-faint);
 }
 
-/* Grid */
+/* ── Grid — Desktop: 3 cols, Mobile: 2 cols ─────────────── */
 .tools-portfolio-grid {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 32px 48px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
+  grid-template-columns: repeat(3, 1fr);
   border: 3px solid var(--ink);
 }
 
-/* Card */
+/* ── Cards ──────────────────────────────────────────────── */
 .tp-card {
   position: relative;
   border: 3px solid var(--ink);
@@ -965,11 +966,19 @@
   color: var(--ink);
 }
 
-/* Image wrapper — 1:1 square ratio */
+/* Wide card: spans 2 cols on desktop, landscape ratio */
+.tp-card.tp-wide {
+  grid-column: span 2;
+}
+.tp-card.tp-wide .tp-card-img-wrap {
+  aspect-ratio: 2 / 1;
+}
+
+/* Tall card: standard portrait ratio */
 .tp-card-img-wrap {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
 }
 
 /* Image: scale + grayscale on hover */
@@ -979,13 +988,14 @@
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease, filter 0.5s ease;
+  background: #1a1a1a;
 }
 .tp-card:hover .tp-card-img {
   transform: scale(1.05);
   filter: grayscale(100%);
 }
 
-/* Red overlay — #FF0004 at 90% opacity */
+/* Red overlay — exact #FF0004 at 90% (from Kimi Portfolio.tsx) */
 .tp-card-overlay {
   position: absolute;
   inset: 0;
@@ -994,9 +1004,7 @@
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-.tp-card:hover .tp-card-overlay {
-  opacity: 1;
-}
+.tp-card:hover .tp-card-overlay { opacity: 1; }
 
 /* Info slides up from bottom */
 .tp-card-info {
@@ -1017,16 +1025,20 @@
   opacity: 1;
   transform: translateY(0);
 }
+
 .tp-card-title {
   font-family: var(--font-display);
-  font-size: clamp(14px, 2.2vw, 22px);
+  font-size: clamp(13px, 1.8vw, 20px);
   font-weight: 700;
   text-transform: uppercase;
   color: #fff;
   line-height: 1.1;
   margin: 0 0 4px;
+  background: none;
   border: none;
 }
+.tp-card.tp-wide .tp-card-title { font-size: clamp(16px, 2.4vw, 26px); }
+
 .tp-card-client {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -1035,10 +1047,7 @@
   letter-spacing: 0.1em;
   margin: 0;
 }
-.tp-arrow {
-  flex-shrink: 0;
-  margin-left: 12px;
-}
+.tp-arrow { flex-shrink: 0; margin-left: 12px; }
 
 /* Bold red inner border on hover */
 .tp-card-border {
@@ -1049,11 +1058,9 @@
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
-.tp-card:hover .tp-card-border {
-  opacity: 1;
-}
+.tp-card:hover .tp-card-border { opacity: 1; }
 
-/* Label bar at bottom */
+/* Label bar */
 .tp-card-bar {
   border-top: 3px solid var(--ink);
   background: var(--paper);
@@ -1075,7 +1082,7 @@
 .tp-card-num {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: rgba(10,10,10,0.45);
+  color: rgba(10,10,10,0.4);
 }
 .tp-free-badge {
   background: var(--yellow);
@@ -1087,8 +1094,8 @@
   letter-spacing: 0.1em;
 }
 
-/* ─── MOBILE RESPONSIVE ──────────────────────────────── */
-@media (max-width: 640px) {
+/* ── MOBILE: 2 columns, wide = full width ───────────────── */
+@media (max-width: 767px) {
   .tp-header {
     padding: 32px 16px 16px;
     flex-direction: column;
@@ -1096,13 +1103,21 @@
     align-items: flex-start;
   }
   .tp-count { display: none; }
+
   .tools-portfolio-grid {
-    padding: 0 16px;
-    grid-template-columns: 1fr;
+    padding: 0 0 32px;
+    grid-template-columns: repeat(2, 1fr);
   }
-  .tp-card-title { font-size: 15px; }
-}
-@media (min-width: 641px) and (max-width: 900px) {
-  .tp-header { padding: 40px 24px 20px; }
-  .tools-portfolio-grid { padding: 0 24px; }
+
+  .tp-card.tp-wide {
+    grid-column: span 2;  /* full-width on mobile */
+  }
+  .tp-card.tp-wide .tp-card-img-wrap {
+    aspect-ratio: 16 / 9;  /* wider on mobile */
+  }
+  .tp-card-img-wrap {
+    aspect-ratio: 1 / 1;  /* square on mobile (saves height) */
+  }
+  .tp-card-title { font-size: 12px; }
+  .tp-card-client { display: none; }
 }
