@@ -38,7 +38,7 @@
   transition: background .25s, color .25s, font-family .25s;
 }
 .output-area h1,.output-area h2,.output-area h3,.output-area h4 {
-  font-family: var(--font-display); text-transform: uppercase;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
   letter-spacing: -.01em; margin: 12px 0 6px;
 }
 .output-area ul,.output-area ol { padding-left: 20px; margin: 6px 0; }

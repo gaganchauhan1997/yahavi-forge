@@ -4,24 +4,24 @@
    ============================================ */
 
 :root {
-  /* === COLOR SYSTEM === */
-  --paper: #faf6e9;
-  --paper-warm: #f0e9d6;
-  --paper-dark: #1a1812;
-  --ink: #0a0a0a;
-  --ink-soft: #2a2a2a;
-  --ink-faint: #6b6b6b;
-  --rule: #0a0a0a;
+  /* === COLOR SYSTEM === (Editorial brutalist palette) */
+  --paper: #ffffff;
+  --paper-warm: #f5f5f5;
+  --paper-dark: #1a1a1a;
+  --ink: #1a1a1a;
+  --ink-soft: #333333;
+  --ink-faint: #666666;
+  --rule: #1a1a1a;
 
-  --yellow: #ffea00;
-  --yellow-bright: #fff200;
-  --pink: #ff2e63;
+  --yellow: #f9ff00;
+  --yellow-bright: #f9ff00;
+  --pink: #ff0004;
   --lime: #b6ff39;
   --blue: #2d4cff;
   --orange: #ff6b1a;
 
   --card: #ffffff;
-  --card-warm: #fcfbf7;
+  --card-warm: #f5f5f5;
 
   /* === SHADOWS === */
   --shadow-sm: 3px 3px 0 var(--ink);
@@ -36,9 +36,9 @@
   --border: 3px solid var(--ink);
   --border-thick: 4px solid var(--ink);
 
-  /* === FONTS === */
-  --font-display: 'Archivo Black', 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  /* === FONTS === (Editorial: Oswald headings + Inter body) */
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
 
   /* === SPACING === */
@@ -62,11 +62,9 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* === Paper texture === */
+/* === Flat editorial background === */
 body {
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(255, 234, 0, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 46, 99, 0.03) 0%, transparent 50%);
+  background: var(--paper);
   min-height: 100vh;
 }
 
@@ -109,7 +107,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -286,7 +284,7 @@ a:hover {
 }
 
 .hero-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: clamp(48px, 8vw, 96px);
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -334,7 +332,7 @@ a:hover {
 }
 
 .hero-stat strong {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 24px;
   color: var(--ink);
 }
@@ -364,7 +362,7 @@ a:hover {
 }
 
 .section-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: clamp(28px, 4vw, 42px);
   text-transform: uppercase;
   letter-spacing: -0.02em;
@@ -435,7 +433,7 @@ a:hover {
 }
 
 .feature-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 22px;
   text-transform: uppercase;
   letter-spacing: -0.01em;
@@ -712,7 +710,7 @@ select {
 }
 
 .output-area h1, .output-area h2, .output-area h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   text-transform: uppercase;
   margin: 14px 0 8px;
   letter-spacing: -0.01em;
@@ -753,7 +751,7 @@ select {
 }
 
 .score-num {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 72px;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -775,7 +773,7 @@ select {
 }
 
 .score-grade {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 28px;
   text-transform: uppercase;
   letter-spacing: -0.01em;
@@ -859,7 +857,7 @@ select {
 }
 
 .drawer-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 28px;
   text-transform: uppercase;
   letter-spacing: -0.02em;
@@ -900,7 +898,7 @@ select {
 }
 
 .provider-name {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: -0.01em;
@@ -959,7 +957,7 @@ select {
 }
 
 .footer-brand {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 20px;
   text-transform: uppercase;
 }
