@@ -842,6 +842,7 @@
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+.nav-mobile-drawer[hidden] { display: none; }
 .nav-mobile-drawer {
   display: flex; flex-direction: column; gap: 8px;
   padding: 12px 16px; background: var(--paper);
