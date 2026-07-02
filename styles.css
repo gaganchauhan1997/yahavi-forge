@@ -52,6 +52,24 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 2px;
+}
+
 html, body {
   background: var(--paper);
   color: var(--ink);
@@ -101,6 +119,11 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+  transition: box-shadow 0.2s ease;
+}
+
+.nav-bar.scrolled {
+  box-shadow: 0 6px 0 rgba(26, 26, 26, 0.08);
 }
 
 .brand {
