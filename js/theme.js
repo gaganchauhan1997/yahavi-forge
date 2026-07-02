@@ -11,7 +11,8 @@
 
   /* All available themes */
   const THEMES = [
-    'cyber-yellow',   // 1 — HackKnow brand (default)
+    'editorial',      // 0 — Swiss editorial brutalist (default)
+    'cyber-yellow',   // 1 — HackKnow brand
     'matrix',         // 2 — Matrix Hacker
     'synthwave',      // 3 — Synthwave
     'tokyo',          // 4 — Tokyo Night
@@ -26,10 +27,11 @@
   ]
 
   /* All 10 cycle for the nav toggle button — each press = next theme */
-  const CYCLE = ['cyber-yellow', 'matrix', 'synthwave', 'tokyo', 'dracula', 'github-dark', 'amber', 'neo-mint', 'crimson', 'arctic']
+  const CYCLE = ['editorial', 'cyber-yellow', 'matrix', 'synthwave', 'tokyo', 'dracula', 'github-dark', 'amber', 'neo-mint', 'crimson', 'arctic']
 
   /* Theme metadata for the picker UI */
   const META = {
+    'editorial':    { label: '▸ Editorial', bg: '#FFFFFF', primary: '#F9FF00', accent: '#FF0004', text: '#1a1a1a', feel: 'Swiss Brutalist' },
     'cyber-yellow': { label: '⭐ Cyber Yellow', bg: '#F5F0E6', primary: '#FFD400', accent: '#FF2E63', text: '#111111', feel: 'HackKnow Identity' },
     'matrix':       { label: '🟩 Matrix Hacker', bg: '#0B0F0C', primary: '#39FF14', accent: '#00D9FF', text: '#F5F5F5', feel: 'Hacker Terminal' },
     'synthwave':    { label: '🌈 Synthwave',    bg: '#1A102B', primary: '#FF2E88', accent: '#00E5FF', text: '#FFFFFF', feel: 'Future Retro' },
@@ -47,6 +49,7 @@
 
   /* Toggle icons for nav button */
   const ICONS = {
+    'editorial': '▸',
     'cyber-yellow': '☀', 'paper': '☀', 'neo-mint': '☀', 'arctic': '☀',
     'dim': '◐',
     'dark': '☾', 'matrix': '▓', 'synthwave': '◈', 'tokyo': '◉',
@@ -72,7 +75,7 @@
 
   /* ─── apply theme ─── */
   function apply(theme) {
-    if (!THEMES.includes(theme)) theme = 'cyber-yellow'
+    if (!THEMES.includes(theme)) theme = 'editorial'
     document.documentElement.setAttribute('data-theme', theme)
     setStored(theme)
     const btn = document.getElementById('theme-toggle')
@@ -96,7 +99,7 @@
     let theme = getStored()
     if (!theme || !THEMES.includes(theme)) {
       theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        ? 'matrix' : 'cyber-yellow'
+        ? 'matrix' : 'editorial'
     }
     apply(theme)
     setBrightness(getBrightness())
@@ -116,7 +119,7 @@
   /* Apply immediately to prevent flash */
   const _initial = getStored() || (
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'matrix' : 'cyber-yellow'
+      ? 'matrix' : 'editorial'
   )
   document.documentElement.setAttribute('data-theme', _initial)
 

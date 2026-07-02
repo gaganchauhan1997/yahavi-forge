@@ -141,7 +141,7 @@
   max-width: 1280px; margin: 0 auto; padding: 32px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
 }
-.footer-news h3 { font-family: var(--font-display); font-size: clamp(20px,3vw,28px); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 6px; }
+.footer-news h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px,3vw,28px); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 6px; }
 .footer-news p { font-family: var(--font-mono); font-size: 12px; color: rgba(250,246,233,0.6); letter-spacing: 0.03em; }
 .footer-news form { display: flex; gap: 10px; flex: 1; min-width: 280px; max-width: 460px; }
 .footer-news input {
@@ -165,7 +165,7 @@
   grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr;
   gap: 32px;
 }
-.footer-brandcol .footer-logo { font-family: var(--font-display); font-size: 24px; text-transform: uppercase; letter-spacing: -0.01em; }
+.footer-brandcol .footer-logo { font-family: var(--font-display); font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: -0.01em; }
 .footer-brandcol .footer-logo .accent { color: var(--yellow); }
 .footer-brandcol .footer-sub { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); margin: 4px 0 14px; }
 .footer-brandcol p.blurb { font-size: 13px; line-height: 1.55; color: rgba(250,246,233,0.6); max-width: 280px; margin-bottom: 18px; }
@@ -198,7 +198,7 @@
   border: 2px solid rgba(250,246,233,0.2); padding: 8px 14px; min-width: 150px;
   display: flex; flex-direction: column; gap: 2px;
 }
-.footer-badge strong { font-family: var(--font-display); font-size: 13px; text-transform: uppercase; color: var(--paper); }
+.footer-badge strong { font-family: var(--font-display); font-weight: 700; font-size: 13px; text-transform: uppercase; color: var(--paper); }
 .footer-badge span { font-family: var(--font-mono); font-size: 10px; color: rgba(250,246,233,0.55); letter-spacing: 0.03em; }
 
 /* Contact row */
@@ -314,10 +314,10 @@ button.feature-card:focus-visible {
 :root {
   --yc-bg:        #111111;   /* panel bg — brand black */
   --yc-msgs-bg:   #0a0a0a;   /* message area — near black */
-  --yc-ai:        #FFD400;   /* AI bubble — brand yellow */
-  --yc-ai-deep:   #E6C000;   /* AI bubble gradient end */
-  --yc-user:      #FF2E63;   /* user bubble — brand pink */
-  --yc-user-deep: #CC1A48;   /* user bubble gradient end */
+  --yc-ai:        #F9FF00;   /* AI bubble — brand yellow */
+  --yc-ai-deep:   #DDE300;   /* AI bubble gradient end */
+  --yc-user:      #FF0004;   /* user bubble — brand red */
+  --yc-user-deep: #CC0003;   /* user bubble gradient end */
   --yc-text:      #ffffff;
   --yc-text-soft: rgba(255,255,255,0.72);
   --yc-input-bg:  #1a1a1a;

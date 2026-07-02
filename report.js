@@ -814,7 +814,7 @@ function buildReportStandaloneHtml(r, localScore, provider, forPrint) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   @page { size: A4; margin: 14mm; }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -823,13 +823,13 @@ function buildReportStandaloneHtml(r, localScore, provider, forPrint) {
   .head{background:#0a0a0a;color:#faf6e9;padding:22px 28px;border:3px solid #0a0a0a;margin-bottom:24px;page-break-after:avoid}
   .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.25em;color:#ffea00;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:10px}
   .badge{width:8px;height:8px;background:#b6ff39;border-radius:50%;display:inline-block}
-  h1{font-family:'Archivo Black',sans-serif;font-size:30px;text-transform:uppercase;letter-spacing:-.025em;margin-bottom:8px}
+  h1{font-family:'Oswald',sans-serif;font-size:30px;text-transform:uppercase;letter-spacing:-.025em;margin-bottom:8px}
   .meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:rgba(250,246,233,.65);text-transform:uppercase}
   .metrics{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:14px;margin-bottom:24px;page-break-inside:avoid}
   .metric{padding:18px;border:2px solid #0a0a0a;background:#fff}
   .metric.dark{background:#0a0a0a;color:#faf6e9}
   .metric .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:10px;opacity:.7}
-  .big{font-family:'Archivo Black',sans-serif;font-size:46px;letter-spacing:-.04em;color:#ffea00;line-height:1}
+  .big{font-family:'Oswald',sans-serif;font-size:46px;letter-spacing:-.04em;color:#ffea00;line-height:1}
   .of{font-size:18px;color:rgba(250,246,233,.5);margin-left:4px}
   .tag{display:inline-block;margin-top:8px;padding:3px 9px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#ffea00;color:#0a0a0a;border:2px solid #0a0a0a}
   .tag.strong,.tag.exceptional,.tag.high{background:#b6ff39}
@@ -838,13 +838,13 @@ function buildReportStandaloneHtml(r, localScore, provider, forPrint) {
   .tag.critical,.tag.low{background:#ff2e63;color:#faf6e9}
   .imp{font-size:16px;font-weight:500;line-height:1.4;color:#0a0a0a}
   .section{background:#fff;border:2px solid #0a0a0a;margin-bottom:14px;padding:18px;page-break-inside:avoid}
-  .section h2{font-family:'Archivo Black',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:-.005em;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #0a0a0a;display:flex;align-items:baseline;gap:10px}
+  .section h2{font-family:'Oswald',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:-.005em;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid #0a0a0a;display:flex;align-items:baseline;gap:10px}
   .section h2 .num{font-family:'JetBrains Mono',monospace;font-size:10px;background:#ff2e63;color:#faf6e9;padding:2px 6px;letter-spacing:.1em;border:1.5px solid #0a0a0a}
   .id-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
   .id-cell{padding:12px;background:#f3ede2;border:2px solid #0a0a0a}
   .id-cell.tgt{background:#ffea00}
   .id-cell .l{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:4px;opacity:.7}
-  .id-cell .v{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:-.01em;line-height:1.2}
+  .id-cell .v{font-family:'Oswald',sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:-.01em;line-height:1.2}
   .align{padding:12px;background:#f3ede2;border-left:4px solid #ff2e63;font-size:14px;line-height:1.5;color:#2a2a2a}
   .align strong{background:#ffea00;padding:0 3px}
   .skill{display:grid;grid-template-columns:1fr 2fr auto;gap:10px;align-items:center;padding:9px 12px;background:#f3ede2;border:1.5px solid #0a0a0a;margin-bottom:8px}
@@ -867,19 +867,19 @@ function buildReportStandaloneHtml(r, localScore, provider, forPrint) {
   .risk.high .sev{background:#ff2e63;color:#faf6e9}
   .risk.medium .sev{background:#ff6b1a;color:#faf6e9}
   .risk.low .sev{background:#ffea00}
-  .risk h4{font-family:'Archivo Black',sans-serif;font-size:13px;text-transform:uppercase;margin-bottom:3px}
+  .risk h4{font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;margin-bottom:3px}
   .risk .ev{font-size:13px;color:#2a2a2a}
   .depth{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
   .dcard{padding:14px;background:#f3ede2;border:2px solid #0a0a0a}
   .dcard .lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:6px;opacity:.7}
-  .dcard .sc{font-family:'Archivo Black',sans-serif;font-size:30px;letter-spacing:-.03em;line-height:1}
+  .dcard .sc{font-family:'Oswald',sans-serif;font-size:30px;letter-spacing:-.03em;line-height:1}
   .dcard .sc .o{font-size:14px;color:#666;margin-left:2px}
   .tenbar{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;margin-top:6px}
   .tenbar span{height:7px;background:#fff;border:1px solid #0a0a0a}
   .tenbar span.f{background:#0a0a0a}
   .imp-grid{display:grid;grid-template-columns:1fr 2fr;gap:12px}
   .imp-sc{text-align:center;padding:22px 14px;background:#0a0a0a;color:#faf6e9;border:2px solid #0a0a0a}
-  .imp-sc .num{font-family:'Archivo Black',sans-serif;font-size:50px;color:#ffea00;letter-spacing:-.04em;line-height:.9}
+  .imp-sc .num{font-family:'Oswald',sans-serif;font-size:50px;color:#ffea00;letter-spacing:-.04em;line-height:.9}
   .imp-sc .of{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-top:4px;opacity:.7}
   .checks{display:flex;flex-direction:column;gap:6px}
   .ck{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#f3ede2;border:1.5px solid #0a0a0a;font-size:12.5px}
@@ -899,7 +899,7 @@ function buildReportStandaloneHtml(r, localScore, provider, forPrint) {
   .quote{padding:16px 18px;background:#0a0a0a;color:#faf6e9;border:2px solid #0a0a0a;font-size:15px;line-height:1.45;font-style:italic;position:relative}
   .quote .l{position:absolute;top:-9px;left:10px;background:#ffea00;color:#0a0a0a;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;padding:1px 7px;letter-spacing:.15em;border:1.5px solid #0a0a0a;font-style:normal}
   .fix{display:grid;grid-template-columns:42px 1fr;gap:12px;padding:12px;background:#f3ede2;border:2px solid #0a0a0a;margin-bottom:8px;align-items:flex-start}
-  .fix .pri{font-family:'Archivo Black',sans-serif;font-size:26px;color:#ff2e63;letter-spacing:-.03em;line-height:1}
+  .fix .pri{font-family:'Oswald',sans-serif;font-size:26px;color:#ff2e63;letter-spacing:-.03em;line-height:1}
   .fix h4{font-weight:600;font-size:13.5px;line-height:1.4;margin-bottom:4px}
   .fix .imp{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#666;text-transform:uppercase;letter-spacing:.08em}
   .rw{margin-bottom:12px}

@@ -275,8 +275,8 @@
         const title = tool.title + ' — Yahavi Forge'
         const content = $('#output', mount).innerHTML
         w.document.write(`<!doctype html><meta charset="utf-8"><title>${escText(title)}</title>
-          <style>body{font-family:'Space Grotesk',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a}
-          h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase;letter-spacing:-.01em}
+          <style>body{font-family:'Inter',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a}
+          h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:-.01em}
           strong{background:#ffea00;padding:0 3px}code{font-family:'JetBrains Mono',monospace;background:#0a0a0a;color:#faf6e9;padding:1px 5px}
           hr{border:none;border-top:2px solid #0a0a0a;margin:16px 0}
           @media print { body { margin: 0; padding: 0 24px } button { display: none } }
@@ -296,8 +296,8 @@
             `<!doctype html><meta charset="utf-8"><title>${escText(
               tool.title
             )} — Yahavi Forge</title>
-          <style>body{font-family:'Space Grotesk',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a;background:#faf6e9}
-          h1,h2,h3{font-family:'Archivo Black',sans-serif;text-transform:uppercase}strong{background:#ffea00;padding:0 3px}</style>
+          <style>body{font-family:'Inter',system-ui,sans-serif;max-width:780px;margin:32px auto;padding:0 16px;line-height:1.55;color:#0a0a0a;background:#faf6e9}
+          h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase}strong{background:#ffea00;padding:0 3px}</style>
           <h1>${escText(tool.title)}</h1>${html}`,
           ],
           { type: 'text/html;charset=utf-8' }
@@ -695,9 +695,9 @@ ${jd}`,
       const rows = list.map((it, i) =>
         `<section style="margin-bottom:36px;border-bottom:2px solid #0a0a0a;padding-bottom:28px;">
           <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
-            <span style="font-family:'Archivo Black',sans-serif;font-size:42px;color:#ff2e63;line-height:1;">${String(i + 1).padStart(2, '0')}</span>
+            <span style="font-family:'Oswald',sans-serif;font-size:42px;color:#ff2e63;line-height:1;">${String(i + 1).padStart(2, '0')}</span>
             <div>
-              <h2 style="font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;letter-spacing:-.01em;">${escText(it.title || it.id)}</h2>
+              <h2 style="font-family:'Oswald',sans-serif;font-size:20px;text-transform:uppercase;letter-spacing:-.01em;">${escText(it.title || it.id)}</h2>
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6b6b6b;letter-spacing:.04em;">${escText(it.source_tool || '')} · ${escText(it.created_at || '')}</div>
             </div>
           </div>
@@ -706,8 +706,8 @@ ${jd}`,
       return `<!doctype html><html lang="en"><head><meta charset="utf-8">
         <title>Yahavi Forge — Omni Export</title>
         <style>
-          body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;max-width:820px;margin:40px auto;padding:0 24px;color:#0a0a0a;background:#faf6e9}
-          @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+          body{font-family:'Inter',system-ui,sans-serif;max-width:820px;margin:40px auto;padding:0 24px;color:#0a0a0a;background:#faf6e9}
+          @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
           @media print{body{margin:0;padding:0 24px}.no-print{display:none}}
         </style></head><body>
         <div class="no-print" style="text-align:right;margin-bottom:24px;">
@@ -715,7 +715,7 @@ ${jd}`,
         </div>
         <header style="margin-bottom:36px;border-bottom:4px solid #0a0a0a;padding-bottom:20px;">
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#ff2e63;margin-bottom:6px;">▸ YAHAVI FORGE · BY HACKKNOW.COM</div>
-          <h1 style="font-family:'Archivo Black',sans-serif;font-size:36px;text-transform:uppercase;letter-spacing:-.02em;line-height:1;">OMNI EXPORT</h1>
+          <h1 style="font-family:'Oswald',sans-serif;font-size:36px;text-transform:uppercase;letter-spacing:-.02em;line-height:1;">OMNI EXPORT</h1>
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b6b6b;margin-top:6px;">${list.length} section${list.length > 1 ? 's' : ''} · Generated ${new Date().toLocaleDateString()}</div>
         </header>
         ${rows}

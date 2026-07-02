@@ -95,7 +95,7 @@
 }
 
 .report-head h1 {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 28px;
   text-transform: uppercase;
   letter-spacing: -0.025em;
@@ -155,7 +155,7 @@
 }
 
 .metric-value {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 56px;
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -232,7 +232,7 @@
 }
 
 .r-section-head h2 {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: -0.005em;
@@ -296,7 +296,7 @@
 }
 
 .identity-block .val {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 18px;
   line-height: 1.2;
   text-transform: uppercase;
@@ -487,7 +487,7 @@
 
 .risk-item .body { flex: 1; }
 .risk-item h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: -0.005em;
@@ -537,7 +537,7 @@
 }
 
 .depth-card .score {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 36px;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -597,7 +597,7 @@
 }
 
 .impact-score-block .num {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 56px;
   line-height: 0.9;
   letter-spacing: -0.04em;
@@ -753,7 +753,7 @@
 }
 
 .fix-item .pri {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 30px;
   line-height: 1;
   color: var(--pink);
@@ -921,7 +921,7 @@
 }
 
 .no-keys-state .icon {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 56px;
   color: var(--pink);
   margin-bottom: 14px;
@@ -929,7 +929,7 @@
 }
 
 .no-keys-state h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-display); font-weight: 700;
   font-size: 22px;
   text-transform: uppercase;
   margin-bottom: 10px;

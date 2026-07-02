@@ -8,7 +8,28 @@
 
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+  function initNav() {
+    const navBar = document.querySelector('.nav-bar')
+    if (!navBar) return
+    let navTick = false
+    const updateNav = () => {
+      navBar.classList.toggle('scrolled', window.scrollY > 50)
+      navTick = false
+    }
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (navTick) return
+        navTick = true
+        requestAnimationFrame(updateNav)
+      },
+      { passive: true }
+    )
+    updateNav()
+  }
+
   function init() {
+    initNav()
     const targets = document.querySelectorAll('.reveal')
     if (!targets.length) return
 
