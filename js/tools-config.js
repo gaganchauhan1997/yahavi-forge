@@ -674,7 +674,6 @@ Concrete things to do in the 24 hours before the interview.`,
       temperature: 0.6,
       maxTokens: 3000,
     },
-  }
 
     /* ═══════════════════ RESUME OUTPUT (2nd-last) ═══════════════════ */
     'resume-output': {
